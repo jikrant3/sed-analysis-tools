@@ -1,6 +1,8 @@
 # sed-analysis-tools
 A python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2024, in prep).
 
+*Requirements*: `python`>=3.12.2, `astropy`>=6.0.1, `matplotlib`>=3.8.4, `numpy`>=1.26.4, `pandas`>=2.2.1, `scipy`>=1.13.0, `tqdm`>=4.57.0
+
 ### `functions_and_classes.py`
 The python module with the code to create and fit single/binary SEDs. Also contails other helper functions which are usefult for estimating errors in SED fiting and other astronomical conversions.
 
