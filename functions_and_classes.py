@@ -312,13 +312,22 @@ def estimate_errors_Single(T: u.Kelvin,
     for seed in range(niter):
         A = Star(T=T, L=L, σ=σ, seed=seed, x=x, name=name)
         A.fit_bb_Single(use_priors=True)
-        _fit_params_Single = dict(name=A.name,
-                                  seed=A.seed,
-                                  logT=A.logT,
-                                  logL=A.logL,
-                                  logT_Single=A.logT_Single,
-                                  logL_Single=A.logL_Single,
-                                  sigma=σ)
+        if hasattr(A, 'logT_Single'):
+            _fit_params_Single = dict(name=A.name,
+                                      seed=A.seed,
+                                      logT=A.logT,
+                                      logL=A.logL,
+                                      logT_Single=A.logT_Single,
+                                      logL_Single=A.logL_Single,
+                                      sigma=σ)
+        else:
+            _fit_params_Single = dict(name=A.name,
+                                      seed=A.seed,
+                                      logT=A.logT,
+                                      logL=A.logL,
+                                      logT_Single=np.nan,
+                                      logL_Single=np.nan,
+                                      sigma=σ)
         fit_params.append(_fit_params_Single)
     df_fit_params = pd.DataFrame(fit_params)
     convergence_rate = (np.sum(np.isfinite(df_fit_params.logT_Single)))/niter
@@ -760,8 +769,8 @@ class Fitter:
         try:
             popt, pcov = curve_fit(Fitter.get_logflux_bb_Single,
                                    spec.x, spec.y, p0=p0,
-                                   bounds=([100, -np.inf],
-                                           [np.inf, np.inf]))
+                                   bounds=([100, -50],
+                                           [10_000_000, 0]))
             if source is not None:
                 source.T_Single = popt[0] * u.K
                 source.logsf_Single = popt[1]
@@ -807,8 +816,8 @@ class Fitter:
         try:
             popt, pcov = curve_fit(Fitter.get_logflux_bb_Double,
                                    spec.x, spec.y, p0=p0,
-                                   bounds=([100, -np.inf, 100, -np.inf],
-                                           [np.inf, np.inf, np.inf, np.inf]))
+                                   bounds=([100, -50, 100, -50],
+                                           [10_000_000, 0, 10_000_000, 0]))
             if source is not None:
                 source.T_A = popt[0] * u.K
                 source.logsf_A = popt[1]
@@ -1171,6 +1180,9 @@ class Grid:
         self.logT_A = np.log10(T_A.value)
         self.logL_A = np.log10(L_A.value)
 
+        if len(logT_B_list) != len(logL_B_list):
+            raise ValueError(
+                'logT_B_list and logL_B_list should have same length.')
         self.n_B = len(logT_B_list)
         self.logT_B_list, self.logL_B_list = logT_B_list, logL_B_list
 
@@ -1274,6 +1286,39 @@ class Grid:
         fit_params = fit_params | fit_params_Double
         return fit_params
 
+    def process_fit_params(self, fit_params):
+        """
+        Calculates median and stddev of the df_fit_params. 
+        And provides limits on the fit parameters based on typical stellar parameters.
+        """
+        df_fit_params = pd.DataFrame(fit_params)
+        df_fit_params['id'] = df_fit_params['name'].str.extract(
+            '(\d+)').astype(int)
+        for column in ['logT_Single', 'logT_A_Double', 'logT_B_Double']:
+            df_fit_params[column] = np.where(
+                df_fit_params[column] > 7, 7, df_fit_params[column])
+        for column in ['logL_Single', 'logL_A_Double', 'logL_B_Double']:
+            df_fit_params[column] = np.where(
+                df_fit_params[column] > 15, 15, df_fit_params[column])
+            df_fit_params[column] = np.where(
+                df_fit_params[column] < -10, -10, df_fit_params[column])
+        for column in ['logT_A', 'logL_A', 'logT_B', 'logL_B',
+                       'logT_Single', 'logL_Single',
+                       'logT_A_Double', 'logL_A_Double', 'logT_B_Double', 'logL_B_Double']:
+            df_fit_params[column[3:]] = 10**df_fit_params[column]
+
+        self.df_fit_params = df_fit_params
+        _group = df_fit_params.drop(columns=['name']).groupby(by='id')
+
+        df_fit_params_median = _group.median()
+        df_fit_params_median['convergence_rate'] = _group.count()[
+            'logT_A_Double']/self.niter
+        self.df_fit_params_median = df_fit_params_median.reset_index()
+
+        df_fit_params_std = _group.std()
+        df_fit_params_std['convergence_rate'] = df_fit_params_median['convergence_rate']
+        self.df_fit_params_std = df_fit_params_std.reset_index()
+
     def calculate_params(self, refit=False):
         """
         Calculates and saves fitting parameters and SEDs.
@@ -1293,11 +1338,6 @@ class Grid:
             if not refit:
                 self.df_fit_params = pd.read_csv(fit_params_name)
                 self.df_fit_params_median = pd.read_csv(fit_params_median_name)
-                if 'fit_count_fraction' in self.df_fit_params_median.columns:
-                    self.df_fit_params_median = self.df_fit_params_median.rename(
-                        columns={'fit_count_fraction': 'convergence_rate'})
-                    self.df_fit_params_median.to_csv(
-                        fit_params_median_name, index=False)
                 self.df_fit_params_std = pd.read_csv(fit_params_std_name)
                 self.df_sed_niter0 = pd.read_csv(sed_niter0_name)
                 return
@@ -1325,29 +1365,11 @@ class Grid:
             '(\d+)').astype(int)
         self.df_sed_niter0 = df_sed_niter0
 
-        df_fit_params = pd.DataFrame(fit_params)
-        df_fit_params['id'] = df_fit_params['name'].str.extract(
-            '(\d+)').astype(int)
-        for column in ['logT_A', 'logL_A', 'logT_B', 'logL_B',
-                       'logT_Single', 'logL_Single',
-                       'logT_A_Double', 'logL_A_Double', 'logT_B_Double', 'logL_B_Double']:
-            df_fit_params[column[3:]] = 10**df_fit_params[column]
-        self.df_fit_params = df_fit_params
-        _group = df_fit_params.drop(columns=['name']).groupby(by='id')
-
-        df_fit_params_median = _group.median()
-        df_fit_params_median['convergence_rate'] = _group.count()[
-            'logT_A_Double']/self.niter
-        self.df_fit_params_median = df_fit_params_median
-
-        df_fit_params_std = _group.std()
-        df_fit_params_std['convergence_rate'] = _group.count()[
-            'logT_A_Double']/self.niter
-        self.df_fit_params_std = df_fit_params_std
-
+        self.process_fit_params(fit_params)
+        
         self.df_fit_params.to_csv(fit_params_name, index=False)
-        self.df_fit_params_median.to_csv(fit_params_median_name)
-        self.df_fit_params_std.to_csv(fit_params_std_name)
+        self.df_fit_params_median.to_csv(fit_params_median_name, index=False)
+        self.df_fit_params_std.to_csv(fit_params_std_name, index=False)
         self.df_sed_niter0.to_csv(sed_niter0_name, index=False)
 
     def plot_skeleton(self, ax=None, isochrones=True, zorder=0):
@@ -1473,11 +1495,10 @@ class Grid:
 
         if niter is None:
             df = self.df_fit_params_median
-            df_std = self.df_fit_params_std
         else:
             df = self.df_fit_params
             df = df[df['name'].str.contains('_niter%d_' % niter)].reset_index()
-            df_std = self.df_fit_params_std
+        df_std = self.df_fit_params_std
         logT_B_list = df.logT_B.unique()
         logL_B_list = df.logL_B.unique()
         color_list = plt.cm.rainbow_r(np.linspace(
@@ -1529,13 +1550,13 @@ class Grid:
         df = df[_filter].reset_index()
         df_std = df_std[_filter].reset_index()
 
-        df_noisy = self.df_fit_params
-        df_noisy = df_noisy[np.isfinite(df_noisy.logT_A_Double)].reset_index()
-
         color_list = plt.cm.rainbow_r(np.linspace(
             0, 1, len(logT_B_list)))  # creates array of N colors
 
         if noisy:
+            df_noisy = self.df_fit_params
+            df_noisy = df_noisy[np.isfinite(
+                df_noisy.logT_A_Double)].reset_index()
             s_list = np.linspace(10, 100, len(logT_B_list))
             s_list = (df.logL_B - np.nanmin(df.logL_B))**2
             s_list = s_list/np.nanmax(s_list) * 90 + 10
