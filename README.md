@@ -13,6 +13,6 @@ The demonstration of how to use `functions_and_classes.py`. Also generate the mo
 The jupyter notebook for creating all the plots in the manuscript.
 
 ## Citation
-If you use this code for your work, kindly include a citation for the code and accompaning paper.
+If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/856901189.svg)](https://zenodo.org/doi/10.5281/zenodo.13789847) and accompaning paper.
 
 Jadhav (2024, in prep) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
