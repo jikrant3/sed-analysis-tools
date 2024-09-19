@@ -15,4 +15,4 @@ The jupyter notebook for creating all the plots in the manuscript.
 ## Citation
 If you use this code for your work, kindly include a citation for the code and accompaning paper.
 
-Jadhav (2024, in prep) _On the detectability of binaries through spectral energy distributions_.
+Jadhav (2024, in prep) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
