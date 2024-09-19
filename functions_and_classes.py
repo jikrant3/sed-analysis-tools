@@ -22,7 +22,7 @@ class Spectrum:
     Attributes:
         x (ndarray): Logarithmic wavelength values.
         y (ndarray): Logarithmic flux values.
-        frac_flux_err (ndarray or None): Fractional flux error.
+        frac_flux_err (ndarray or float or None): Fractional flux error.
         seed (int): Seed for random noise generation.
 
     Methods:
@@ -38,7 +38,11 @@ class Spectrum:
         plot_physical(ax, **kwargs): Plots the spectrum in physical units.
     """
 
-    def __init__(self, x, y, frac_flux_err=None, seed=0) -> None:
+    def __init__(self,
+                 x,
+                 y,
+                 frac_flux_err: None | float | np.ndarray = None,
+                 seed: int = 0) -> None:
         """
         Initializes the Spectrum object.
 
@@ -151,7 +155,7 @@ class Spectrum:
         Adds noise to the spectrum based on fractional flux error.
 
         Args:
-            σ (float or ndarray): The fractional noise level or array of noise values.
+            σ (None or float or ndarray): The fractional noise level or array of noise values.
             seed (int, optional): Seed for random noise generation. Default is 0.
 
         Raises:
@@ -286,8 +290,8 @@ def calc_radius(L: u.solLum, T: u.Kelvin):
 @u.quantity_input
 def estimate_errors_Single(T: u.Kelvin,
                            L: u.solLum,
-                           σ,
-                           x,
+                           σ: None | float | np.ndarray,
+                           x: np.ndarray,
                            niter=50,
                            name='',
                            plot=True,
@@ -298,8 +302,8 @@ def estimate_errors_Single(T: u.Kelvin,
     Args:
         T (Quantity): Temperature of the star in Kelvins.
         L (Quantity): Luminosity of the star in solar luminosities (Lsun).
-        σ (float): Flux error or noise level.
-        x (array-like): Independent variable data points.
+        σ (None or float or np.ndarray): Flux error or noise level.
+        x (np.ndarray): log(wavelength [Angstrom]) .
         niter (int, optional): Number of iterations to run. Defaults to 50.
         name (str, optional): Name of the star. Defaults to ''.
         plot (bool, optional): Whether to plot the results. Defaults to True.
@@ -373,12 +377,12 @@ def estimate_errors_Double(T_A: u.Kelvin,
                            L_A: u.solLum,
                            T_B: u.Kelvin,
                            L_B: u.solLum,
-                           σ,
-                           x,
-                           niter=50,
-                           name='',
-                           plot=True,
-                           plot_name=None):
+                           σ: None | float | np.ndarray,
+                           x: np.ndarray,
+                           niter: int = 50,
+                           name: str = '',
+                           plot: bool = True,
+                           plot_name: None | str = None):
     """
     Estimate the errors for fitting a binary star system model.
 
@@ -387,8 +391,8 @@ def estimate_errors_Double(T_A: u.Kelvin,
         L_A (Quantity): Luminosity of star A in solar luminosities (Lsun).
         T_B (Quantity): Temperature of star B in Kelvins.
         L_B (Quantity): Luminosity of star B in solar luminosities (Lsun).
-        σ (float): Flux error or noise level.
-        x (array-like): Independent variable data points.
+        σ (None or float or np.ndarray): Flux error or noise level.
+        x (np.ndarray): log(wavelength [Angstrom]) .
         niter (int, optional): Number of iterations to run. Defaults to 50.
         name (str, optional): Name of the binary system. Defaults to ''.
         plot (bool, optional): Whether to plot the results. Defaults to True.
@@ -921,11 +925,11 @@ class Star:
     def __init__(self,
                  T: u.Kelvin,
                  L: u.solLum,
-                 σ=0,
+                 σ: None | float | np.ndarray = 0,
                  seed=0,
                  D=10 * u.pc,
                  threshold_detection=5,
-                 x=np.linspace(3.13, 4.70, 50),
+                 x : np.ndarray = np.linspace(3.13, 4.70, 50),
                  name='') -> None:
         """
         Initialize a Star object.
@@ -933,11 +937,11 @@ class Star:
         Args:
             T (u.Kelvin): Temperature of the star.
             L (u.solLum): Luminosity of the star.
-            σ (float or list, optional): Standard deviation in flux. Defaults to 0.
+            σ (None or float or list, optional): Standard deviation in flux. Defaults to 0.
             seed (int, optional): Random seed. Defaults to 0.
             D (u.pc, optional): Distance to the star. Defaults to 10 parsecs.
             threshold_detection (float, optional): Detection threshold (*flux_std) to identify badly fitting filters. Defaults to 5.
-            x (np.ndarray, optional): Wavelengths for the spectrum. Defaults to np.linspace(3.13, 4.70, 50).
+            x (np.ndarray, optional): log(wavelengths [Angstrom]) for the spectrum. Defaults to np.linspace(3.13, 4.70, 50).
             name (str, optional): Name of the star. Defaults to an empty string.
         """
         self.T = T.to(u.K)
@@ -1025,7 +1029,7 @@ class Binary:
                  T_B: u.Kelvin,
                  L_A: u.solLum,
                  L_B: u.solLum,
-                 σ=0,
+                 σ: None | float | np.ndarray = 0,
                  seed=0,
                  D=10 * u.pc,
                  threshold_detection=5,
@@ -1039,7 +1043,7 @@ class Binary:
             T_B (u.Kelvin): Temperature of the second star.
             L_A (u.solLum): Luminosity of the first star.
             L_B (u.solLum): Luminosity of the second star.
-            σ (float, optional): Standard deviation in flux. Defaults to 0.
+            σ (None or float or np.ndarray,optional): Standard deviation in flux. Defaults to 0.
             seed (int, optional): Random seed. Defaults to 0.
             D (u.pc, optional): Distance to the binary system. Defaults to 10 parsecs.
             threshold_detection (float, optional): Detection threshold (*flux_std) to identify badly fitting filters. Defaults to 5.
@@ -1136,7 +1140,7 @@ class Grid:
                  T_A: u.Kelvin,
                  L_A: u.solLum,
                  niter=1,
-                 σ=0.001,
+                 σ : float | np.ndarray = 0.001,
                  D=10 * u.pc,
                  threshold_filters=3,
                  threshold_detection=5,
@@ -1151,19 +1155,19 @@ class Grid:
             T_A (u.Kelvin): Temperature of star A.
             L_A (u.solLum): Luminosity of star A.
             niter (int, optional): Number of iterations for fitting. Defaults to 1.
-            σ (float, optional): Standard deviation in flux. Must be greater than 0. Defaults to 0.001.
+            σ (float or np.ndarray, optional): Standard deviation in flux. Must be greater than 0. Defaults to 0.001.
             D (u.pc, optional): Distance to the binary system. Defaults to 10 parsecs.
             threshold_filters (int, optional): Threshold for detection of badly fitting filters. Defaults to 3.
             threshold_detection (int, optional): Detection threshold to identify issues. Defaults to 5.
-            x (np.ndarray, optional): Wavelength range for spectrum fitting. Defaults to np.linspace(3.13, 4.70, 50).
+            x (np.ndarray, optional): log(Wavelength [Angstrom]) range for spectrum fitting. Defaults to np.linspace(3.13, 4.70, 50).
             name (str, optional): Name for the grid. Defaults to ''.
-            logT_B_list (list, optional): List of logarithmic temperatures for star B.
-            logL_B_list (list, optional): List of logarithmic luminosities for star B.
+            logT_B_list (list, optional): List of log(temperatures [K]) for star B.
+            logL_B_list (list, optional): List of log(luminosities [solLum]) for star B.
 
         Raises:
             NotImplementedError: If σ is set to 0.
         """
-        if σ == 0:
+        if (σ is 0):
             raise NotImplemented(
                 'σ=0 is trivial and not implemented. Provide σ>0.')
 
@@ -1366,7 +1370,7 @@ class Grid:
         self.df_sed_niter0 = df_sed_niter0
 
         self.process_fit_params(fit_params)
-        
+
         self.df_fit_params.to_csv(fit_params_name, index=False)
         self.df_fit_params_median.to_csv(fit_params_median_name, index=False)
         self.df_fit_params_std.to_csv(fit_params_std_name, index=False)
