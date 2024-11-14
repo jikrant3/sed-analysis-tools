@@ -1,0 +1,18 @@
+.. currentmodule:: src.sed_analysis_tools
+
+Changelog
+=========
+
+1.1.0
+-----
+
+Added support for psuedo-secondaries to understand the degeneracy of nearby secondaries occupying similar HRD position as the input B component.
+
+Added documentation
+
+Version corresponding to the first revision of manuscript.
+
+1.0.0
+-----
+
+Version corresponding to the first submission of manuscript.

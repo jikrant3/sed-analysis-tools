@@ -1,0 +1,14 @@
+.. currentmodule:: src.sed_analysis_tools
+
+Utility functions
+-----------------
+
+.. autofunction:: L_T_to_R
+
+.. autofunction:: R_distance_to_sf
+
+.. autofunction:: R_T_to_L
+
+.. autofunction:: sf_distance_to_R
+
+.. autofunction:: T_sf_distance_to_L

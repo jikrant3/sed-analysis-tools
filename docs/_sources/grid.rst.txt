@@ -1,0 +1,8 @@
+.. currentmodule:: src.sed_analysis_tools
+
+   
+:class:`Grid`
+---------------------
+.. autoclass:: Grid
+   :members:
+   :inherited-members:

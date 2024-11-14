@@ -1,0 +1,10 @@
+Getting Started
+===============
+
+.. toctree::
+   :maxdepth: 1
+
+   example_spectrum
+   example_star
+   example_binary
+   example_grid

@@ -1,0 +1,8 @@
+.. currentmodule:: src.sed_analysis_tools
+
+   
+:class:`Star`
+---------------------
+.. autoclass:: Star
+   :members:
+   :inherited-members:

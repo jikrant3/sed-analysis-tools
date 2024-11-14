@@ -1,0 +1,67 @@
+.. sed-analysis-tools documentation master file, created by
+   sphinx-quickstart on Thu Nov 14 16:51:42 2024.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to sed-analysis-tools's documentation!
+==============================================
+
+Fitting stellar SEDs for single and multi-component systems.
+
+GitHub: `sed-analysis-tools <https://github.com/jikrant3/sed-analysis-tools/>`__
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Requirements
+~~~~~~~~~~~~~
+
+* ``python`` >= 3.10.12
+
+* ``astropy`` >= 6.0.1
+
+* ``matplotlib`` >= 3.7.1
+
+* ``numpy`` >= 1.24.4
+
+* ``pandas`` >= 2.2.2
+
+* ``scipy`` >= 1.12.0
+
+* ``tqdm`` >= 1.12.0
+
+Installation
+~~~~~~~~~~~~
+
+- Add the ``sed_analysi_tools.py`` to your working directory.
+   - ⚠️ Edit the ``DIR_MODELS`` in the ``sed_analysi_tools.py`` file according to where your model files are located
+
+- Download the required models from `models_and_tools <https://github.com/jikrant3/models_and_tools/>`__.
+
+   - Isochrones: ``master_isochrone.csv`` (`Parsec isochrones <http://stev.oapd.inaf.it/cmd>`__)
+
+   - WD cooling curves: ``master_Bergeron_WD.csv`` (`Bergeron models <https://www.astro.umontreal.ca/~bergeron/CoolingModels/>`__)
+
+Citation
+~~~~~~~~
+
+This code is developed by Vikrant V. Jadhav (Universität Bonn).
+
+If you use the code, please refer to Jadhav et al. (2025, under rewiew), *On the detectability and parameterisation of binary stars through spectral energy distributions*, 
+Journal of Astrophysics and Astronomy
+.. , Volume 42, Issue 2, article id.89 (https://doi.org/10.1007/s12036-021-09746-y)
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   Home <self>
+   getting_started
+   modules
+   changelog
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

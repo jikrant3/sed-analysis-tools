@@ -1,0 +1,12 @@
+Code Documentation
+==================
+
+.. toctree::
+   :maxdepth: 4
+
+   spectrum
+   fitter
+   star
+   binary
+   grid
+   util_functions
