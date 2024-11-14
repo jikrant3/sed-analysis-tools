@@ -5,11 +5,21 @@ A python module to model, fit and analyse single and binary spectral energy dist
 
 *Requirements*: `python`>=3.12.2, `astropy`>=6.0.1, `matplotlib`>=3.8.4, `numpy`>=1.26.4, `pandas`>=2.2.1, `scipy`>=1.13.0, `tqdm`>=4.57.0
 
+## Installation
+- Add the `src/sed_analysis_tools.py` to your working directory.
+   - ⚠️ Edit the `DIR_MODELS` in the `sed_analysis_tools.py` file according to where your model files are located
+
+- Download the required models from [models_and_tools](https://github.com/jikrant3/models_and_tools/tree/main/models).
+
+   - Isochrones: `master_isochrone.csv` ([Parsec isochrones](http://stev.oapd.inaf.it/cmd))
+
+   - WD cooling curves: `master_Bergeron_WD.csv` ([Bergeron models](https://www.astro.umontreal.ca/~bergeron/CoolingModels/))
+
 ### `src.sed_analysis_tools.py`
 The python module with the code to create and fit single/binary SEDs. Also contails other helper functions which are usefult for estimating errors in SED fiting and other astronomical conversions.
 
 ### `manuscript_code.ipynb`
-The demonstration of how to use `functions_and_classes.py`. Also generate the models required to replicate the contents of the manuscript.
+Generates the models required to replicate the contents of the manuscript.
 
 ### `manuscript_plots.ipynb`
 The jupyter notebook for creating all the plots in the manuscript.
