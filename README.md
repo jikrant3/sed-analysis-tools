@@ -19,10 +19,10 @@ The module will download models (e.g. isochrones) and filter transmission curves
 The `examples/` also contains the code required to recreate the data and plots given in the publication.
 
 Understanding the recoverability of binary system using SED for a given filter set and noise levels.
-![recoverability](sphinx/guide_error_estimation/demo_hrd_grid.jpg)
+![recoverability](docs/_images/demo_hrd_grid.jpg)
 
 Estimating SED fitting errors assuming blackbody approximation. And visualizing the possible degeneracy due to nearby secondaries resulting in similar HRD position.
-![error_estimation](sphinx/guide_error_estimation/error_estimation.png)
+![error_estimation](docs/_images/error_estimation.png)
 ### Citing sed_analysis_tools
 If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/856901189.svg)](https://zenodo.org/doi/10.5281/zenodo.13789847) and accompaning paper.
 
