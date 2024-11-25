@@ -283,6 +283,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sed_analysis_tools</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="recommended-approch">
@@ -307,13 +309,45 @@ degeneracy in the secondary recovery space</p></li>
 <span class="n">starB</span><span class="o">.</span><span class="n">estimate_errors</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                       <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">starB</span><span class="o">.</span><span class="n">plot_estimated_errors</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">starB</span><span class="o">.</span><span class="n">df_error_summary</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
+<span class="o">-----</span>
+<span class="n">T_in</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">300000.000000</span><span class="p">]</span>
+<span class="n">L_in</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">1.000000</span><span class="p">]</span>
+<span class="n">T_fit</span> <span class="o">=</span> <span class="p">[</span><span class="mf">158972.897116</span> <span class="o">+</span><span class="mf">214488.545372</span><span class="o">-</span><span class="mf">80722.128686</span><span class="p">]</span>
+<span class="n">L_fit</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.134766</span> <span class="o">+</span><span class="mf">1.836627</span><span class="o">-</span><span class="mf">0.114097</span><span class="p">]</span>
+<span class="n">Convergence</span> <span class="n">rate</span><span class="p">:</span><span class="mf">0.69</span>
+<span class="n">logT</span>                        <span class="mf">5.477121</span>
+<span class="n">logL</span>                        <span class="mf">0.000000</span>
+<span class="n">T</span>                      <span class="mf">300000.000000</span>
+<span class="n">L</span>                           <span class="mf">1.000000</span>
+<span class="n">logT_Single_16</span>              <span class="mf">4.893402</span>
+<span class="n">logT_Single_50</span>              <span class="mf">5.201323</span>
+<span class="n">logT_Single_84</span>              <span class="mf">5.572227</span>
+<span class="n">e_logT_Single_upper</span>         <span class="mf">0.370904</span>
+<span class="n">e_logT_Single_lower</span>         <span class="mf">0.307922</span>
+<span class="n">logL_Single_16</span>             <span class="o">-</span><span class="mf">1.687507</span>
+<span class="n">logL_Single_50</span>             <span class="o">-</span><span class="mf">0.870419</span>
+<span class="n">logL_Single_84</span>              <span class="mf">0.294700</span>
+<span class="n">e_logL_Single_upper</span>         <span class="mf">1.165119</span>
+<span class="n">e_logL_Single_lower</span>         <span class="mf">0.817089</span>
+<span class="n">T_Single_16</span>             <span class="mf">78250.768429</span>
+<span class="n">T_Single_50</span>            <span class="mf">158972.897116</span>
+<span class="n">T_Single_84</span>            <span class="mf">373461.442487</span>
+<span class="n">e_T_Single_upper</span>       <span class="mf">214488.545372</span>
+<span class="n">e_T_Single_lower</span>        <span class="mf">80722.128686</span>
+<span class="n">L_Single_16</span>                 <span class="mf">0.020669</span>
+<span class="n">L_Single_50</span>                 <span class="mf">0.134766</span>
+<span class="n">L_Single_84</span>                 <span class="mf">1.971393</span>
+<span class="n">e_L_Single_upper</span>            <span class="mf">1.836627</span>
+<span class="n">e_L_Single_lower</span>            <span class="mf">0.114097</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<img alt="_images/output_3_11.png" src="_images/output_3_11.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Stellar parameters and flux error values are taken from the WOCS2002 star in M67. - Jadhav et al. (2019)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -372,6 +406,7 @@ degeneracy in the secondary recovery space</p></li>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">estimate_errors</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">threshold_primary_match</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)</span>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">evaluate_pseudo_secondaries</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">plot_error_and_pseudo_secondaries</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">WOCS2002</span><span class="o">.</span><span class="n">df_error_summary</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WOCS2002</span>
@@ -386,7 +421,58 @@ degeneracy in the secondary recovery space</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WOCS2002: Grid params :   0%|          | 0/100 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<img alt="_images/output_4_2.png" src="_images/output_4_2.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">logT_A</span>                       <span class="mf">3.720159</span>
+<span class="n">logL_A</span>                       <span class="mf">1.255273</span>
+<span class="n">logT_B</span>                       <span class="mf">4.168792</span>
+<span class="n">logL_B</span>                      <span class="o">-</span><span class="mf">1.031517</span>
+<span class="n">T_A</span>                       <span class="mf">5250.000000</span>
+<span class="n">L_A</span>                         <span class="mf">18.000000</span>
+<span class="n">T_B</span>                      <span class="mf">14750.000000</span>
+<span class="n">L_B</span>                          <span class="mf">0.093000</span>
+<span class="n">logT_A_Double_16</span>             <span class="mf">3.717470</span>
+<span class="n">logT_A_Double_50</span>             <span class="mf">3.719972</span>
+<span class="n">logT_A_Double_84</span>             <span class="mf">3.722313</span>
+<span class="n">e_logT_A_Double_upper</span>        <span class="mf">0.002341</span>
+<span class="n">e_logT_A_Double_lower</span>        <span class="mf">0.002502</span>
+<span class="n">logL_A_Double_16</span>             <span class="mf">1.249098</span>
+<span class="n">logL_A_Double_50</span>             <span class="mf">1.254145</span>
+<span class="n">logL_A_Double_84</span>             <span class="mf">1.258488</span>
+<span class="n">e_logL_A_Double_upper</span>        <span class="mf">0.004344</span>
+<span class="n">e_logL_A_Double_lower</span>        <span class="mf">0.005047</span>
+<span class="n">logT_B_Double_16</span>             <span class="mf">4.112148</span>
+<span class="n">logT_B_Double_50</span>             <span class="mf">4.169273</span>
+<span class="n">logT_B_Double_84</span>             <span class="mf">4.240975</span>
+<span class="n">e_logT_B_Double_upper</span>        <span class="mf">0.071702</span>
+<span class="n">e_logT_B_Double_lower</span>        <span class="mf">0.057126</span>
+<span class="n">logL_B_Double_16</span>            <span class="o">-</span><span class="mf">1.176510</span>
+<span class="n">logL_B_Double_50</span>            <span class="o">-</span><span class="mf">1.035262</span>
+<span class="n">logL_B_Double_84</span>            <span class="o">-</span><span class="mf">0.869362</span>
+<span class="n">e_logL_B_Double_upper</span>        <span class="mf">0.165900</span>
+<span class="n">e_logL_B_Double_lower</span>        <span class="mf">0.141248</span>
+<span class="n">T_A_Double_16</span>             <span class="mf">5217.592595</span>
+<span class="n">T_A_Double_50</span>             <span class="mf">5247.735616</span>
+<span class="n">T_A_Double_84</span>             <span class="mf">5276.103507</span>
+<span class="n">e_T_A_Double_upper</span>          <span class="mf">28.367891</span>
+<span class="n">e_T_A_Double_lower</span>          <span class="mf">30.143021</span>
+<span class="n">L_A_Double_16</span>               <span class="mf">17.745906</span>
+<span class="n">L_A_Double_50</span>               <span class="mf">17.953317</span>
+<span class="n">L_A_Double_84</span>               <span class="mf">18.133778</span>
+<span class="n">e_L_A_Double_upper</span>           <span class="mf">0.180461</span>
+<span class="n">e_L_A_Double_lower</span>           <span class="mf">0.207411</span>
+<span class="n">T_B_Double_16</span>            <span class="mf">12946.378806</span>
+<span class="n">T_B_Double_50</span>            <span class="mf">14766.376248</span>
+<span class="n">T_B_Double_84</span>            <span class="mf">17417.199584</span>
+<span class="n">e_T_B_Double_upper</span>        <span class="mf">2650.823336</span>
+<span class="n">e_T_B_Double_lower</span>        <span class="mf">1819.997442</span>
+<span class="n">L_B_Double_16</span>                <span class="mf">0.066603</span>
+<span class="n">L_B_Double_50</span>                <span class="mf">0.092202</span>
+<span class="n">L_B_Double_84</span>                <span class="mf">0.135095</span>
+<span class="n">e_L_B_Double_upper</span>           <span class="mf">0.042894</span>
+<span class="n">e_L_B_Double_lower</span>           <span class="mf">0.025599</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<img alt="_images/output_4_3.png" src="_images/output_4_3.png" />
 </section>
 <section id="advanced-using-filter-transmission">
 <h2>ADVANCED: Using filter transmission<a class="headerlink" href="#advanced-using-filter-transmission" title="Link to this heading">¶</a></h2>
@@ -452,6 +538,7 @@ similar results (due to on-the-fly filter-spectrum convolution)</p></li>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">estimate_errors</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">threshold_primary_match</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)</span>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">evaluate_pseudo_secondaries</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">WOCS2002</span><span class="o">.</span><span class="n">plot_error_and_pseudo_secondaries</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">WOCS2002</span><span class="o">.</span><span class="n">df_error_summary</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WOCS2002_with_filter_transmission</span>

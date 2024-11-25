@@ -6,6 +6,8 @@ Guide to estimate SED errors
     from astropy import units as u
     import numpy as np
     import sed_analysis_tools as st
+    import warnings
+    warnings.filterwarnings("ignore")
 
 Recommended approch
 -------------------
@@ -31,12 +33,52 @@ Recommended approch
     starB.estimate_errors(niter=100,
                           verbose=True)
     starB.plot_estimated_errors()
+    print(starB.df_error_summary)
+
+
+.. parsed-literal::
+
+    B
+    -----
+    T_in  = [300000.000000]
+    L_in  = [1.000000]
+    T_fit = [158972.897116 +214488.545372-80722.128686]
+    L_fit = [0.134766 +1.836627-0.114097]
+    Convergence rate:0.69
+    logT                        5.477121
+    logL                        0.000000
+    T                      300000.000000
+    L                           1.000000
+    logT_Single_16              4.893402
+    logT_Single_50              5.201323
+    logT_Single_84              5.572227
+    e_logT_Single_upper         0.370904
+    e_logT_Single_lower         0.307922
+    logL_Single_16             -1.687507
+    logL_Single_50             -0.870419
+    logL_Single_84              0.294700
+    e_logL_Single_upper         1.165119
+    e_logL_Single_lower         0.817089
+    T_Single_16             78250.768429
+    T_Single_50            158972.897116
+    T_Single_84            373461.442487
+    e_T_Single_upper       214488.545372
+    e_T_Single_lower        80722.128686
+    L_Single_16                 0.020669
+    L_Single_50                 0.134766
+    L_Single_84                 1.971393
+    e_L_Single_upper            1.836627
+    e_L_Single_lower            0.114097
+    dtype: float64
+
+
+
+.. image:: guide_error_estimation/output_3_1.png
+
 
 .. code:: ipython3
 
-    import warnings
     
-    warnings.filterwarnings("ignore")
     
     """
     Stellar parameters and flux error values are taken from the WOCS2002 star in M67. - Jadhav et al. (2019)
@@ -97,6 +139,7 @@ Recommended approch
     WOCS2002.estimate_errors(niter=100, verbose=True, threshold_primary_match=0.10)
     WOCS2002.evaluate_pseudo_secondaries(grid_size=10, niter=100, refit=False)
     WOCS2002.plot_error_and_pseudo_secondaries()
+    print(WOCS2002.df_error_summary)
 
 
 .. parsed-literal::
@@ -116,8 +159,61 @@ Recommended approch
     WOCS2002: Grid params :   0%|          | 0/100 [00:00<?, ?it/s]
 
 
+.. parsed-literal::
 
-.. image:: guide_error_estimation/output_4_2.png
+    logT_A                       3.720159
+    logL_A                       1.255273
+    logT_B                       4.168792
+    logL_B                      -1.031517
+    T_A                       5250.000000
+    L_A                         18.000000
+    T_B                      14750.000000
+    L_B                          0.093000
+    logT_A_Double_16             3.717470
+    logT_A_Double_50             3.719972
+    logT_A_Double_84             3.722313
+    e_logT_A_Double_upper        0.002341
+    e_logT_A_Double_lower        0.002502
+    logL_A_Double_16             1.249098
+    logL_A_Double_50             1.254145
+    logL_A_Double_84             1.258488
+    e_logL_A_Double_upper        0.004344
+    e_logL_A_Double_lower        0.005047
+    logT_B_Double_16             4.112148
+    logT_B_Double_50             4.169273
+    logT_B_Double_84             4.240975
+    e_logT_B_Double_upper        0.071702
+    e_logT_B_Double_lower        0.057126
+    logL_B_Double_16            -1.176510
+    logL_B_Double_50            -1.035262
+    logL_B_Double_84            -0.869362
+    e_logL_B_Double_upper        0.165900
+    e_logL_B_Double_lower        0.141248
+    T_A_Double_16             5217.592595
+    T_A_Double_50             5247.735616
+    T_A_Double_84             5276.103507
+    e_T_A_Double_upper          28.367891
+    e_T_A_Double_lower          30.143021
+    L_A_Double_16               17.745906
+    L_A_Double_50               17.953317
+    L_A_Double_84               18.133778
+    e_L_A_Double_upper           0.180461
+    e_L_A_Double_lower           0.207411
+    T_B_Double_16            12946.378806
+    T_B_Double_50            14766.376248
+    T_B_Double_84            17417.199584
+    e_T_B_Double_upper        2650.823336
+    e_T_B_Double_lower        1819.997442
+    L_B_Double_16                0.066603
+    L_B_Double_50                0.092202
+    L_B_Double_84                0.135095
+    e_L_B_Double_upper           0.042894
+    e_L_B_Double_lower           0.025599
+    dtype: float64
+
+
+
+.. image:: guide_error_estimation/output_4_3.png
 
 
 ADVANCED: Using filter transmission
@@ -186,6 +282,7 @@ ADVANCED: Using filter transmission
     WOCS2002.estimate_errors(niter=10, verbose=True, threshold_primary_match=0.10)
     WOCS2002.evaluate_pseudo_secondaries(grid_size=3, niter=10, refit=False)
     WOCS2002.plot_error_and_pseudo_secondaries()
+    print(WOCS2002.df_error_summary)
 
 
 .. parsed-literal::
