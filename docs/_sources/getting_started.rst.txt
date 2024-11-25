@@ -1,10 +1,39 @@
 Getting Started
 ===============
 
+.. image:: guide_Spectrum/output_5_0.png
+   :width: 240px
+
+.. image:: guide_FilterSet/output_6_1.png
+   :width: 240px
+
+.. image:: guide_Star/output_5_0.png
+   :width: 240px
+
+.. image:: guide_Binary/output_8_0.png
+   :width: 240px
+
+.. image:: guide_error_estimation/demo_hrd_grid.jpg
+   :width: 240px
+
+.. image:: guide_error_estimation/error_estimation.png
+   :width: 240px
+
 .. toctree::
    :maxdepth: 1
 
-   example_spectrum
-   example_star
-   example_binary
-   example_grid
+   guide_Spectrum
+
+   guide_FilterSet
+
+
+   guide_Star
+
+
+   guide_Binary
+
+
+   guide_Grid
+
+
+   guide_error_estimation

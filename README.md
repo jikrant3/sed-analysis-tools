@@ -1,30 +1,43 @@
-# sed-analysis-tools
+# sed_analysis_tools
 A python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2024, in prep).
 
-## Documentation at [jikrant3.github.io/sed-analysis-tools](https://jikrant3.github.io/sed-analysis-tools)
+### Documentation at [jikrant3.github.io/sed-analysis-tools](https://jikrant3.github.io/sed-analysis-tools)
 
-*Requirements*: `python`>=3.12.2, `astropy`>=6.0.1, `matplotlib`>=3.8.4, `numpy`>=1.26.4, `pandas`>=2.2.1, `scipy`>=1.13.0, `tqdm`>=4.57.0
+
 
 ## Installation
-- Add the `src/sed_analysis_tools.py` to your working directory.
-   - ⚠️ Edit the `DIR_MODELS` in the `sed_analysis_tools.py` file according to where your model files are located
+```
+pip install sed_analysis_tools
+```
+Requirements: 
+`python`>=3.10, `astropy`>=6.0, `matplotlib`>=3.7, `numpy`>=1.24, `pandas`>=2.0, `scipy`>=1.12, `tqdm`>=1.12
 
-- Download the required models from [models_and_tools](https://github.com/jikrant3/models_and_tools/tree/main/models).
+The module will download models (e.g. isochrones) and filter transmission curves as required into a `$HOME/.sed_analysis_tools` (or equivalent) folder.
 
-   - Isochrones: `master_isochrone.csv` ([Parsec isochrones](http://stev.oapd.inaf.it/cmd))
+### Getting started
+[getting_started](https://jikrant3.github.io/sed-analysis-tools/getting_started.html) and `examples/` contains some guides and jupyter notebooks. 
+The `examples/` also contains the code required to recreate the data and plots given in the publication.
 
-   - WD cooling curves: `master_Bergeron_WD.csv` ([Bergeron models](https://www.astro.umontreal.ca/~bergeron/CoolingModels/))
+Understanding the recoverability of binary system using SED for a given filter set and noise levels.
+![recoverability](sphinx/guide_error_estimation/demo_hrd_grid.jpg)
 
-### `src.sed_analysis_tools.py`
-The python module with the code to create and fit single/binary SEDs. Also contails other helper functions which are usefult for estimating errors in SED fiting and other astronomical conversions.
-
-### `manuscript_code.ipynb`
-Generates the models required to replicate the contents of the manuscript.
-
-### `manuscript_plots.ipynb`
-The jupyter notebook for creating all the plots in the manuscript.
-
-## Citation
+Estimating SED fitting errors assuming blackbody approximation. And visualizing the possible degeneracy due to nearby secondaries resulting in similar HRD position.
+![error_estimation](sphinx/guide_error_estimation/error_estimation.png)
+### Citing sed_analysis_tools
 If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/856901189.svg)](https://zenodo.org/doi/10.5281/zenodo.13789847) and accompaning paper.
 
 Jadhav (2024, in prep) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
+
+```
+@software{jikrant3_2024_14166044,
+author       = {{Jadhav}, Vikrant V.},
+title        = {jikrant3/sed-analysis-tools},
+month        = Nov,
+year         = 2024,
+publisher    = {Zenodo},
+version      = {v1.2.0},
+doi          = {10.5281/zenodo.14166044},
+url          = {https://doi.org/10.5281/zenodo.14166044}
+}
+
+```

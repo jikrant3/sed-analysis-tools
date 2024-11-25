@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Star" href="star.html" /><link rel="prev" title="Spectrum" href="spectrum.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="FilterSet" href="filter_set.html" /><link rel="prev" title="Spectrum" href="spectrum.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Fitter - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Fitter - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -276,25 +279,24 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="fitter">
-<h1><a class="reference internal" href="#src.sed_analysis_tools.Fitter" title="src.sed_analysis_tools.Fitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><a class="headerlink" href="#fitter" title="Link to this heading">¶</a></h1>
+<h1><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter" title="sed_analysis_tools.sed_analysis_tools.Fitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><a class="headerlink" href="#fitter" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Fitter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Fitter</span></span><a class="headerlink" href="#src.sed_analysis_tools.Fitter" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sed_analysis_tools.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Fitter</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Fitter.bb_Double">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum" title="src.sed_analysis_tools.Spectrum"><span class="pre">Spectrum</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20,</span> <span class="pre">5000,</span> <span class="pre">-20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Fitter.bb_Double" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.bb_Double">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star" title="sed_analysis_tools.sed_analysis_tools.Star"><span class="pre">Star</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary" title="sed_analysis_tools.sed_analysis_tools.Binary"><span class="pre">Binary</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20,</span> <span class="pre">5000,</span> <span class="pre">-20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Double" title="Link to this definition">¶</a></dt>
 <dd><p>Fit a double blackbody model to the spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>spec</strong> (<a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum" title="src.sed_analysis_tools.Spectrum"><em>Spectrum</em></a>) – Spectrum object containing the observed flux data.</p></li>
-<li><p><strong>p0</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – Initial guess for the fit parameters [Temperature1, Log Scaling Factor1, Temperature2, Log Scaling Factor2] (default is [5000., -20, 5000, -20]).</p></li>
-<li><p><strong>source</strong> (<a class="reference internal" href="star.html#src.sed_analysis_tools.Star" title="src.sed_analysis_tools.Star"><em>Star</em></a><em> or </em><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><em>Binary</em></a><em>, </em><em>optional</em>) – Source object to store the fitted parameters (default is None).</p></li>
-<li><p><strong>threshold_primary_match</strong> (<em>float</em><em>, </em><em>optional</em>) – Threshold for matching the primary component, used for fit validation (default is None).</p></li>
+<li><p><strong>source</strong> (<em>Union</em><em>[</em><em>&quot;Star&quot;</em><em>, </em><em>&quot;Binary&quot;</em><em>]</em>) – Source object containing spectrum and other properties (default is None).</p></li>
+<li><p><strong>p0</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – Initial guess for fit parameters [T_1, logsf_1, T_2, logsf_2] (default is [5000.0, -20, 5000.0, -20]).</p></li>
+<li><p><strong>threshold_primary_match</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Threshold for validating the primary blackbody fit match (default is None).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Optimized fit parameters as a NumPy array. If the fit fails or is rejected, returns an array filled with NaNs.</p>
+<dd class="field-even"><p>Optimized fit parameters [T_1, logsf_1, T_2, logsf_2]. Returns NaNs if fit fails or is rejected.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
@@ -303,19 +305,18 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Fitter.bb_Single">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum" title="src.sed_analysis_tools.Spectrum"><span class="pre">Spectrum</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Fitter.bb_Single" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.bb_Single">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star" title="sed_analysis_tools.sed_analysis_tools.Star"><span class="pre">Star</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary" title="sed_analysis_tools.sed_analysis_tools.Binary"><span class="pre">Binary</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Single" title="Link to this definition">¶</a></dt>
 <dd><p>Fit a single blackbody model to the spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>spec</strong> (<a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum" title="src.sed_analysis_tools.Spectrum"><em>Spectrum</em></a>) – Spectrum object containing the observed flux data.</p></li>
-<li><p><strong>p0</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – Initial guess for the fit parameters [Temperature, Log Scaling Factor] (default is [5000., -20]).</p></li>
-<li><p><strong>source</strong> (<em>Source</em><em>, </em><em>optional</em>) – Source object to store the fitted parameters (default is None).</p></li>
+<li><p><strong>source</strong> (<em>Union</em><em>[</em><em>&quot;Star&quot;</em><em>, </em><em>&quot;Binary&quot;</em><em>]</em>) – Source object containing spectrum and other properties (default is None).</p></li>
+<li><p><strong>p0</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – Initial guess for fit parameters [Temperature (K), Log Scaling Factor] (default is [5000.0, -20]).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Optimized fit parameters as a NumPy array. If the fit fails or is rejected, returns an array filled with NaNs.</p>
+<dd class="field-even"><p>Optimized fit parameters [T, logsf]. Returns NaNs if fit fails or is rejected.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
@@ -324,21 +325,45 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Fitter.get_logflux_bb_Double">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_logflux_bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Fitter.get_logflux_bb_Double" title="Link to this definition">¶</a></dt>
-<dd><p>Calculate the logarithmic flux for a double blackbody model.</p>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Double">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_logflux_bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><span class="pre">FilterSet</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Double" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the flux for a double blackbody model with the given filter set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>float</em><em> or </em><em>array-like</em>) – Logarithm of the wavelength in Angstroms.</p></li>
 <li><p><strong>T_1</strong> (<em>float</em>) – Temperature of the first blackbody in Kelvin.</p></li>
 <li><p><strong>logsf_1</strong> (<em>float</em>) – Logarithmic scaling factor for the first blackbody.</p></li>
 <li><p><strong>T_2</strong> (<em>float</em>) – Temperature of the second blackbody in Kelvin.</p></li>
 <li><p><strong>logsf_2</strong> (<em>float</em>) – Logarithmic scaling factor for the second blackbody.</p></li>
+<li><p><strong>filter_set</strong> (<a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><em>FilterSet</em></a><em>, </em><em>optional</em>) – The filter set to convolve the blackbody spectra with. If mode is “no_filters”,
+fluxes are calculated directly for the wavelengths in <cite>filter_set.x</cite>.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to generate a plot of the spectra and photometry (default is False).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Logarithm of the combined blackbody flux in ergs/cm^2/s/Å.</p>
+<dd class="field-even"><p>Logarithmic flux values corresponding to the filter set wavelengths or synthesized photometry.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray or float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Single">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_logflux_bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><span class="pre">FilterSet</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Single" title="Link to this definition">¶</a></dt>
+<dd><p>Compute flux for a single blackbody model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<em>float</em>) – Blackbody temperature in Kelvin.</p></li>
+<li><p><strong>logsf</strong> (<em>float</em>) – Logarithmic scaling factor.</p></li>
+<li><p><strong>filter_set</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><em>FilterSet</em></a><em>]</em>) – Set of filters to convolve the blackbody with (default is None).</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – Whether to plot the result (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Logarithmic flux for the blackbody model.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float or np.ndarray</p>
@@ -347,19 +372,40 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Fitter.get_logflux_bb_Single">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_logflux_bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scaling_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Fitter.get_logflux_bb_Single" title="Link to this definition">¶</a></dt>
-<dd><p>Calculate the logarithmic flux for a single blackbody model.</p>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.synth_phot">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">synth_phot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('m')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('erg</span> <span class="pre">/</span> <span class="pre">(Angstrom</span> <span class="pre">s</span> <span class="pre">cm2)')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Quantity</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.synth_phot" title="Link to this definition">¶</a></dt>
+<dd><p>Compute synthetic photometry by integrating flux with a filter response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wavelength</strong> (<em>astropy.Quantity</em><em> (</em><em>u.m</em><em>)</em>) – Wavelength array.</p></li>
+<li><p><strong>flux</strong> (<em>astropy.Quantity</em><em> (</em><em>u.erg / u.cm**2 / u.s / u.Angstrom</em><em>)</em>) – Flux density array.</p></li>
+<li><p><strong>filter_response</strong> (<em>np.ndarray</em>) – Filter transmission response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Integrated flux in units of ergs/cm^2/s/Å.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>astropy.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Fitter.x_T_logsf_to_logflux_bb">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x_T_logsf_to_logflux_bb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logsf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Fitter.x_T_logsf_to_logflux_bb" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the logarithmic flux for a blackbody given wavelength, temperature, and scaling factor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>float</em><em> or </em><em>array-like</em>) – Logarithm of the wavelength in Angstroms.</p></li>
 <li><p><strong>T</strong> (<em>float</em>) – Temperature of the blackbody in Kelvin.</p></li>
-<li><p><strong>log_scaling_factor</strong> (<em>float</em>) – Logarithmic scaling factor (related to radius/distance).</p></li>
+<li><p><strong>logsf</strong> (<em>float</em>) – Logarithmic scaling factor (related to radius and distance).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Logarithm of the blackbody flux in ergs/cm^2/s/Å.</p>
+<dd class="field-even"><p>Logarithmic blackbody flux in ergs/cm^2/s/Å.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float or np.ndarray</p>
@@ -376,12 +422,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="star.html">
+          <a class="next-page" href="filter_set.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></div>
+                <div class="title"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -427,11 +473,13 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Fitter"><code class="docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Fitter.bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Double()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Fitter.bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Single()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Fitter.get_logflux_bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Double()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Fitter.get_logflux_bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Single()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter"><code class="docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Double()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Single()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Double()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Single()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.synth_phot"><code class="docutils literal notranslate"><span class="pre">Fitter.synth_phot()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Fitter.x_T_logsf_to_logflux_bb"><code class="docutils literal notranslate"><span class="pre">Fitter.x_T_logsf_to_logflux_bb()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -445,7 +493,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

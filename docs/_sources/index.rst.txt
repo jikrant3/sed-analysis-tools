@@ -6,48 +6,75 @@
 Welcome to sed-analysis-tools's documentation!
 ==============================================
 
-Fitting stellar SEDs for single and multi-component systems.
+Fitting and analysing stellar spectral energy distributions (SEDs) for single and multi-component systems assuming blackbody modelling. 
 
-GitHub: `sed-analysis-tools <https://github.com/jikrant3/sed-analysis-tools/>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Test the recoverability of a single/binary system for a give set of filters
+* Estimate the lower limit to the SED errors
+* Ability to use real filter transmission curves
 
-Requirements
-~~~~~~~~~~~~~
-
-* ``python`` >= 3.10.12
-
-* ``astropy`` >= 6.0.1
-
-* ``matplotlib`` >= 3.7.1
-
-* ``numpy`` >= 1.24.4
-
-* ``pandas`` >= 2.2.2
-
-* ``scipy`` >= 1.12.0
-
-* ``tqdm`` >= 1.12.0
 
 Installation
 ~~~~~~~~~~~~
 
-- Add the ``sed_analysi_tools.py`` to your working directory.
-   - ⚠️ Edit the ``DIR_MODELS`` in the ``sed_analysi_tools.py`` file according to where your model files are located
+.. code-block::
 
-- Download the required models from `models_and_tools <https://github.com/jikrant3/models_and_tools/>`__.
+   pip install sed_analysis_tools
 
-   - Isochrones: ``master_isochrone.csv`` (`Parsec isochrones <http://stev.oapd.inaf.it/cmd>`__)
+**GitHub**: `sed-analysis-tools <https://github.com/jikrant3/sed-analysis-tools/>`__
 
-   - WD cooling curves: ``master_Bergeron_WD.csv`` (`Bergeron models <https://www.astro.umontreal.ca/~bergeron/CoolingModels/>`__)
+* Requirements
 
-Citation
-~~~~~~~~
+``python`` >= 3.10,
+``astropy`` >= 6.0,
+``matplotlib`` >= 3.7,
+``numpy`` >= 1.24,
+``pandas`` >= 2.0,
+``scipy`` >= 1.12,
+``tqdm`` >= 1.12
+
+* The module will download models (e.g. isochrones) and filter transmission curves as required into a `$HOME/.sed_analysis_tools` (or equivalent) folder.
+
+Basic working
+~~~~~~~~~~~~~
+
+SED fitting using blackbody modelling
+
+.. image:: guide_Binary/output_8_0.png
+
+Understanding the recoverability of binary system using SED for a given filter set and noise levels.
+
+.. image:: guide_error_estimation/demo_hrd_grid.jpg
+
+Estimating SED fitting errors assuming blackbody approximation. And visualizing the possible degeneracy due to nearby secondaries resulting in similar HRD position.
+
+.. image:: guide_error_estimation/error_estimation.png
+
+
+
+
+Citing sed_analysis_tools
+~~~~~~~~~~~~~~~~~~~~~~~~~
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.14166044.svg
+  :target: https://doi.org/10.5281/zenodo.14166044
 
 This code is developed by Vikrant V. Jadhav (Universität Bonn).
 
-If you use the code, please refer to Jadhav et al. (2025, under rewiew), *On the detectability and parameterisation of binary stars through spectral energy distributions*, 
+If you use the code, please cite the `Zenodo repository <https://doi.org/10.5281/zenodo.14166044>`__ and Jadhav et al. (2025, under rewiew), *On the detectability and parameterisation of binary stars through spectral energy distributions*, 
 Journal of Astrophysics and Astronomy
-.. , Volume 42, Issue 2, article id.89 (https://doi.org/10.1007/s12036-021-09746-y)
+
+.. code-block:: latex
+
+   @software{jikrant3_2024_14166044,
+   author       = {{Jadhav}, Vikrant V.},
+   title        = {jikrant3/sed-analysis-tools},
+   month        = Nov,
+   year         = 2024,
+   publisher    = {Zenodo},
+   version      = {v1.2.0},
+   doi          = {10.5281/zenodo.14166044},
+   url          = {https://doi.org/10.5281/zenodo.14166044}
+   }
+
 
 .. toctree::
    :maxdepth: 2

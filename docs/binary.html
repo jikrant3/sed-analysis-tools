@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Grid" href="grid.html" /><link rel="prev" title="Star" href="star.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Binary - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Binary - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -276,13 +279,156 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="binary">
-<h1><a class="reference internal" href="#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a><a class="headerlink" href="#binary" title="Link to this heading">¶</a></h1>
+<h1><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary" title="sed_analysis_tools.sed_analysis_tools.Binary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a><a class="headerlink" href="#binary" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_A:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_B:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_A:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_B:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">~numpy.ndarray</span> <span class="pre">|</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D:</span> <span class="pre">Unit(&quot;pc&quot;)</span> <span class="pre">=</span> <span class="pre">&lt;Quantity</span> <span class="pre">10.</span> <span class="pre">pc&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_ewr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">~numpy.ndarray</span> <span class="pre">=</span> <span class="pre">array([3.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.7])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.sed_analysis_tools.Binary" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.estimate_errors">
-<span class="sig-name descname"><span class="pre">estimate_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.estimate_errors" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sed_analysis_tools.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_A:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_B:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_A:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_B:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">~numpy.ndarray</span> <span class="pre">|</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D:</span> <span class="pre">Unit(&quot;pc&quot;)</span> <span class="pre">=</span> <span class="pre">&lt;Quantity</span> <span class="pre">10.</span> <span class="pre">pc&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_ewr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_set:</span> <span class="pre">~sed_analysis_tools.sed_analysis_tools.FilterSet</span> <span class="pre">=</span> <span class="pre">&lt;sed_analysis_tools.sed_analysis_tools.FilterSet</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary" title="Link to this definition">¶</a></dt>
+<dd><p>A class to represent a binary star system with two stars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T_A</strong> (<em>u.Quantity</em>) – Temperature of the first star in Kelvin.</p></li>
+<li><p><strong>T_B</strong> (<em>u.Quantity</em>) – Temperature of the second star in Kelvin.</p></li>
+<li><p><strong>L_A</strong> (<em>u.Quantity</em>) – Luminosity of the first star in solar luminosities.</p></li>
+<li><p><strong>L_B</strong> (<em>u.Quantity</em>) – Luminosity of the second star in solar luminosities.</p></li>
+<li><p><strong>frac_err</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – Fractional error in flux for the combined spectrum. Defaults to 0.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed for reproducibility. Defaults to 0.</p></li>
+<li><p><strong>D</strong> (<em>u.Quantity</em><em>, </em><em>optional</em>) – Distance to the binary system in parsecs. Defaults to 10 pc.</p></li>
+<li><p><strong>threshold_ewr</strong> (<em>float</em><em>, </em><em>optional</em>) – Detection threshold for EWR to identify poorly fitting filters (with abs(EWR) &gt; threshold_ewr). Defaults to 5.</p></li>
+<li><p><strong>filter_set</strong> (<a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><em>FilterSet</em></a><em>, </em><em>optional</em>) – The filter set used for observations. Defaults to a <cite>FilterSet</cite> with pivot wavelengths from 1600 Å to 50000 Å.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the binary system. Defaults to an empty string.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.A">
+<span class="sig-name descname"><span class="pre">A</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.A" title="Link to this definition">¶</a></dt>
+<dd><p>The first star in the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star" title="sed_analysis_tools.sed_analysis_tools.Star">Star</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.B">
+<span class="sig-name descname"><span class="pre">B</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.B" title="Link to this definition">¶</a></dt>
+<dd><p>The second star in the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star" title="sed_analysis_tools.sed_analysis_tools.Star">Star</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.threshold_ewr">
+<span class="sig-name descname"><span class="pre">threshold_ewr</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.threshold_ewr" title="Link to this definition">¶</a></dt>
+<dd><p>Detection threshold for EWR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.D">
+<span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.D" title="Link to this definition">¶</a></dt>
+<dd><p>Distance to the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>u.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.filter_set">
+<span class="sig-name descname"><span class="pre">filter_set</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.filter_set" title="Link to this definition">¶</a></dt>
+<dd><p>The filter set associated with the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet">FilterSet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.x" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithmic wavelengths in Angstroms for the spectrum/SED, based on the filter set’s pivot wavelengths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.frac_err">
+<span class="sig-name descname"><span class="pre">frac_err</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.frac_err" title="Link to this definition">¶</a></dt>
+<dd><p>Fractional error in flux for the combined spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.seed" title="Link to this definition">¶</a></dt>
+<dd><p>Random seed for reproducibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.spectrum">
+<span class="sig-name descname"><span class="pre">spectrum</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.spectrum" title="Link to this definition">¶</a></dt>
+<dd><p>Combined spectrum of the binary system (A + B).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum" title="sed_analysis_tools.sed_analysis_tools.Spectrum">Spectrum</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.spectrum_ratio">
+<span class="sig-name descname"><span class="pre">spectrum_ratio</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.spectrum_ratio" title="Link to this definition">¶</a></dt>
+<dd><p>Ratio of the second star’s spectrum to the first star’s spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum" title="sed_analysis_tools.sed_analysis_tools.Spectrum">Spectrum</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">None</span> <span class="pre">explicitly</span> <span class="pre">defined</span> <span class="pre">yet.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.estimate_errors">
+<span class="sig-name descname"><span class="pre">estimate_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.estimate_errors" title="Link to this definition">¶</a></dt>
 <dd><p>Estimate errors by fitting models multiple times and evaluating the parameter spread.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -296,8 +442,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.evaluate_pseudo_secondaries">
-<span class="sig-name descname"><span class="pre">evaluate_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.evaluate_pseudo_secondaries" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.evaluate_pseudo_secondaries">
+<span class="sig-name descname"><span class="pre">evaluate_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.evaluate_pseudo_secondaries" title="Link to this definition">¶</a></dt>
 <dd><p>Evaluate a grid of pseudo-secondaries near the HRD position of B component.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -311,8 +457,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.fit_bb_Double">
-<span class="sig-name descname"><span class="pre">fit_bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_priors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.fit_bb_Double" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Double">
+<span class="sig-name descname"><span class="pre">fit_bb_Double</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_priors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Double" title="Link to this definition">¶</a></dt>
 <dd><p>Fit a double blackbody model to the binary system’s spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -326,8 +472,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.fit_bb_Single">
-<span class="sig-name descname"><span class="pre">fit_bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.fit_bb_Single" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Single">
+<span class="sig-name descname"><span class="pre">fit_bb_Single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Single" title="Link to this definition">¶</a></dt>
 <dd><p>Fit a single blackbody model to the binary system’s spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -337,8 +483,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.plot" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the input spectrum of the binary system and its individual components.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -351,8 +497,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries">
-<span class="sig-name descname"><span class="pre">plot_error_and_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries">
+<span class="sig-name descname"><span class="pre">plot_error_and_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries" title="Link to this definition">¶</a></dt>
 <dd><p>Plot both the error estimation and the grid of pseudo-secondaries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -365,8 +511,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.plot_estimated_errors">
-<span class="sig-name descname"><span class="pre">plot_estimated_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.plot_estimated_errors" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.plot_estimated_errors">
+<span class="sig-name descname"><span class="pre">plot_estimated_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_estimated_errors" title="Link to this definition">¶</a></dt>
 <dd><p>Plot estimated errors and median values on the HR diagram.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -379,8 +525,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.plot_fitted">
-<span class="sig-name descname"><span class="pre">plot_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.plot_fitted" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.plot_fitted">
+<span class="sig-name descname"><span class="pre">plot_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_fitted" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the fitted spectrum of the binary system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -397,8 +543,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Binary.plot_pseudo_secondaries">
-<span class="sig-name descname"><span class="pre">plot_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Binary.plot_pseudo_secondaries" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Binary.plot_pseudo_secondaries">
+<span class="sig-name descname"><span class="pre">plot_pseudo_secondaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_pseudo_secondaries" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the grid of pseudo-secondaries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -470,16 +616,27 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary"><code class="docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Binary.estimate_errors()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.evaluate_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.evaluate_pseudo_secondaries()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Double()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Single()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.plot"><code class="docutils literal notranslate"><span class="pre">Binary.plot()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_error_and_pseudo_secondaries()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Binary.plot_estimated_errors()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Binary.plot_fitted()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Binary.plot_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_pseudo_secondaries()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary"><code class="docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.A"><code class="docutils literal notranslate"><span class="pre">Binary.A</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.B"><code class="docutils literal notranslate"><span class="pre">Binary.B</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.threshold_ewr"><code class="docutils literal notranslate"><span class="pre">Binary.threshold_ewr</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.D"><code class="docutils literal notranslate"><span class="pre">Binary.D</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.filter_set"><code class="docutils literal notranslate"><span class="pre">Binary.filter_set</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.x"><code class="docutils literal notranslate"><span class="pre">Binary.x</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.frac_err"><code class="docutils literal notranslate"><span class="pre">Binary.frac_err</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.seed"><code class="docutils literal notranslate"><span class="pre">Binary.seed</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.name"><code class="docutils literal notranslate"><span class="pre">Binary.name</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.spectrum"><code class="docutils literal notranslate"><span class="pre">Binary.spectrum</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.spectrum_ratio"><code class="docutils literal notranslate"><span class="pre">Binary.spectrum_ratio</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Binary.estimate_errors()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.evaluate_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.evaluate_pseudo_secondaries()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Double()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Single()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot"><code class="docutils literal notranslate"><span class="pre">Binary.plot()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_error_and_pseudo_secondaries()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Binary.plot_estimated_errors()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Binary.plot_fitted()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Binary.plot_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_pseudo_secondaries()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -493,7 +650,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

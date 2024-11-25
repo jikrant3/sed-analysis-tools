@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Guide to use Spectrum objects" href="example_spectrum.html" /><link rel="prev" title="Welcome to sed-analysis-tools’s documentation!" href="index.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Guide to use Spectrum object" href="guide_Spectrum.html" /><link rel="prev" title="Welcome to sed-analysis-tools’s documentation!" href="index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Getting Started - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Getting Started - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -277,13 +280,27 @@
         <article role="main" id="furo-main-content">
           <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
+<a class="reference internal image-reference" href="_images/output_5_0.png"><img alt="_images/output_5_0.png" src="_images/output_5_0.png" style="width: 240px;" />
+</a>
+<a class="reference internal image-reference" href="_images/output_6_1.png"><img alt="_images/output_6_1.png" src="_images/output_6_1.png" style="width: 240px;" />
+</a>
+<a class="reference internal image-reference" href="_images/output_5_01.png"><img alt="_images/output_5_01.png" src="_images/output_5_01.png" style="width: 240px;" />
+</a>
+<a class="reference internal image-reference" href="_images/output_8_0.png"><img alt="_images/output_8_0.png" src="_images/output_8_0.png" style="width: 240px;" />
+</a>
+<a class="reference internal image-reference" href="_images/demo_hrd_grid.jpg"><img alt="_images/demo_hrd_grid.jpg" src="_images/demo_hrd_grid.jpg" style="width: 240px;" />
+</a>
+<a class="reference internal image-reference" href="_images/error_estimation.png"><img alt="_images/error_estimation.png" src="_images/error_estimation.png" style="width: 240px;" />
+</a>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </div>
 </section>
@@ -293,12 +310,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="example_spectrum.html">
+          <a class="next-page" href="guide_Spectrum.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Guide to use Spectrum objects</div>
+                <div class="title">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -337,11 +354,12 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

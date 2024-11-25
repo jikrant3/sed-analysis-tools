@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Utility functions" href="util_functions.html" /><link rel="prev" title="Binary" href="binary.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Grid - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Grid - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -276,13 +279,228 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="grid">
-<h1><a class="reference internal" href="#src.sed_analysis_tools.Grid" title="src.sed_analysis_tools.Grid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a><a class="headerlink" href="#grid" title="Link to this heading">¶</a></h1>
+<h1><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid" title="sed_analysis_tools.sed_analysis_tools.Grid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a><a class="headerlink" href="#grid" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_A:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_A:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">~numpy.ndarray</span> <span class="pre">|</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D:</span> <span class="pre">Unit(&quot;pc&quot;)</span> <span class="pre">=</span> <span class="pre">&lt;Quantity</span> <span class="pre">10.</span> <span class="pre">pc&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_nfilters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_ewr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_convergence_rate:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">~numpy.ndarray</span> <span class="pre">=</span> <span class="pre">array([3.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">3.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">4.7])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logT_B_list:</span> <span class="pre">list[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logL_B_list:</span> <span class="pre">list[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.sed_analysis_tools.Grid" title="Link to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.calculate_params">
-<span class="sig-name descname"><span class="pre">calculate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.calculate_params" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sed_analysis_tools.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_A:</span> <span class="pre">Unit(&quot;K&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_A:</span> <span class="pre">Unit(&quot;solLum&quot;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">~numpy.ndarray</span> <span class="pre">|</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D:</span> <span class="pre">Unit(&quot;pc&quot;)</span> <span class="pre">=</span> <span class="pre">&lt;Quantity</span> <span class="pre">10.</span> <span class="pre">pc&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_nfilters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_ewr:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_primary_match:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_convergence_rate:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_set:</span> <span class="pre">~sed_analysis_tools.sed_analysis_tools.FilterSet</span> <span class="pre">=</span> <span class="pre">&lt;sed_analysis_tools.sed_analysis_tools.FilterSet</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logT_B_list:</span> <span class="pre">list[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logL_B_list:</span> <span class="pre">list[float]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid" title="Link to this definition">¶</a></dt>
+<dd><p>A class to represent a grid of secondary stars for binary fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T_A</strong> (<em>u.Quantity</em>) – Temperature of the primary star A in Kelvin.</p></li>
+<li><p><strong>L_A</strong> (<em>u.Quantity</em>) – Luminosity of the primary star A in solar luminosities.</p></li>
+<li><p><strong>niter</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of random iterations for fitting. Defaults to 1.</p></li>
+<li><p><strong>frac_err</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – Fractional error in flux. Must be greater than 0. Defaults to 0.001.</p></li>
+<li><p><strong>D</strong> (<em>u.Quantity</em><em>, </em><em>optional</em>) – Distance to the binary system in parsecs. Defaults to 10 pc.</p></li>
+<li><p><strong>threshold_nfilters</strong> (<em>int</em><em>, </em><em>optional</em>) – Threshold for the detection of poorly fitting filters. Defaults to 3.</p></li>
+<li><p><strong>threshold_ewr</strong> (<em>float</em><em>, </em><em>optional</em>) – Detection threshold for EWR to identify poorly fitting filters. Defaults to 5.</p></li>
+<li><p><strong>threshold_primary_match</strong> (<em>float</em><em>, </em><em>optional</em>) – Acceptable fractional error in the primary parameters (T and sf). Defaults to 0.1.</p></li>
+<li><p><strong>threshold_convergence_rate</strong> (<em>float</em><em>, </em><em>optional</em>) – Threshold for assessing the convergence rate. Defaults to 0.5.</p></li>
+<li><p><strong>filter_set</strong> (<a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet"><em>FilterSet</em></a><em>, </em><em>optional</em>) – Filter set used for the observations. Defaults to a <cite>FilterSet</cite> with pivot wavelengths from 1600 Å to 50000 Å.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the grid. Defaults to an empty string.</p></li>
+<li><p><strong>logT_B_list</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – List of logarithmic temperatures (log10(T/K)) for secondary star B. Must have the same length as <cite>logL_B_list</cite>.</p></li>
+<li><p><strong>logL_B_list</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – List of logarithmic luminosities (log10(L/solLum)) for secondary star B. Must have the same length as <cite>logT_B_list</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.T_A">
+<span class="sig-name descname"><span class="pre">T_A</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.T_A" title="Link to this definition">¶</a></dt>
+<dd><p>Temperature of the primary star A.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>u.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.L_A">
+<span class="sig-name descname"><span class="pre">L_A</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.L_A" title="Link to this definition">¶</a></dt>
+<dd><p>Luminosity of the primary star A.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>u.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.frac_err">
+<span class="sig-name descname"><span class="pre">frac_err</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.frac_err" title="Link to this definition">¶</a></dt>
+<dd><p>Fractional error in flux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.D">
+<span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.D" title="Link to this definition">¶</a></dt>
+<dd><p>Distance to the binary system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>u.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.niter">
+<span class="sig-name descname"><span class="pre">niter</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.niter" title="Link to this definition">¶</a></dt>
+<dd><p>Number of iterations for random fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.threshold_nfilters">
+<span class="sig-name descname"><span class="pre">threshold_nfilters</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_nfilters" title="Link to this definition">¶</a></dt>
+<dd><p>Threshold for detecting poorly fitting filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.threshold_ewr">
+<span class="sig-name descname"><span class="pre">threshold_ewr</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_ewr" title="Link to this definition">¶</a></dt>
+<dd><p>Detection threshold for EWR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.threshold_primary_match">
+<span class="sig-name descname"><span class="pre">threshold_primary_match</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_primary_match" title="Link to this definition">¶</a></dt>
+<dd><p>Acceptable fractional error in the primary parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.threshold_convergence_rate">
+<span class="sig-name descname"><span class="pre">threshold_convergence_rate</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_convergence_rate" title="Link to this definition">¶</a></dt>
+<dd><p>Threshold for assessing convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.filter_set">
+<span class="sig-name descname"><span class="pre">filter_set</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.filter_set" title="Link to this definition">¶</a></dt>
+<dd><p>Filter set used for the observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet" title="sed_analysis_tools.sed_analysis_tools.FilterSet">FilterSet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.x" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithmic wavelengths in Angstroms for the spectrum/SED, based on the filter set’s pivot wavelengths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.logT_A">
+<span class="sig-name descname"><span class="pre">logT_A</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.logT_A" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithmic temperature (log10(T_A/K)) of the primary star.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.logL_A">
+<span class="sig-name descname"><span class="pre">logL_A</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.logL_A" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithmic luminosity (log10(L_A/solLum)) of the primary star.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.n_B">
+<span class="sig-name descname"><span class="pre">n_B</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.n_B" title="Link to this definition">¶</a></dt>
+<dd><p>Number of secondary stars in the grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.logT_B_list">
+<span class="sig-name descname"><span class="pre">logT_B_list</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.logT_B_list" title="Link to this definition">¶</a></dt>
+<dd><p>List of logarithmic temperatures for secondary stars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.logL_B_list">
+<span class="sig-name descname"><span class="pre">logL_B_list</span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.logL_B_list" title="Link to this definition">¶</a></dt>
+<dd><p>List of logarithmic luminosities for secondary stars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NotImplementedError</strong> – If <cite>frac_err</cite> is set to 0.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>logT_B_list</cite> and <cite>logL_B_list</cite> have different lengths.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.calculate_params">
+<span class="sig-name descname"><span class="pre">calculate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.calculate_params" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates and saves fitting parameters and SEDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -292,67 +510,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.get_AB_fit">
-<span class="sig-name descname"><span class="pre">get_AB_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_A</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('K')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_B</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('K')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_A</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('solLum')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_B</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit('solLum')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><span class="pre">Binary</span></a></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.get_AB_fit" title="Link to this definition">¶</a></dt>
-<dd><p>A helper function that creates a <cite>Binary</cite> instance and performs a fit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>T_A</strong> (<em>u.Kelvin</em>) – Temperature of star A.</p></li>
-<li><p><strong>T_B</strong> (<em>u.Kelvin</em>) – Temperature of star B.</p></li>
-<li><p><strong>L_A</strong> (<em>u.solLum</em>) – Luminosity of star A.</p></li>
-<li><p><strong>L_B</strong> (<em>u.solLum</em>) – Luminosity of star B.</p></li>
-<li><p><strong>frac_err</strong> (<em>float</em><em> or </em><em>np.array</em>) – Fractional error in flux.</p></li>
-<li><p><strong>seed</strong> (<em>int</em>) – Random seed for fitting.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – Name for the binary fit.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A <cite>Binary</cite> instance with fitted parameters.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary">Binary</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.get_AB_fit_params">
-<span class="sig-name descname"><span class="pre">get_AB_fit_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">AB</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><span class="pre">Binary</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.get_AB_fit_params" title="Link to this definition">¶</a></dt>
-<dd><p>A helper function that retrieves fitting parameters from the <cite>Binary</cite> instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>AB</strong> (<a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><em>Binary</em></a>) – The <cite>Binary</cite> instance to extract fit parameters from.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dictionary containing fit parameters.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict of str to float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.get_sed_params">
-<span class="sig-name descname"><span class="pre">get_sed_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">AB</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><span class="pre">Binary</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.get_sed_params" title="Link to this definition">¶</a></dt>
-<dd><p>A helper function that extracts SED parameters from the fitted <cite>Binary</cite> instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>AB</strong> (<a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary" title="src.sed_analysis_tools.Binary"><em>Binary</em></a>) – The <cite>Binary</cite> instance to extract parameters from.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>DataFrame containing SED parameters.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Generate a series of plots and save to a file if specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -362,8 +521,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot_Double_fitting_T2err">
-<span class="sig-name descname"><span class="pre">plot_Double_fitting_T2err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_T2err" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_T2err">
+<span class="sig-name descname"><span class="pre">plot_Double_fitting_T2err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_T2err" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the percentage T_2 errors for the fitted secondary grid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -378,8 +537,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot_Double_fitting_lines">
-<span class="sig-name descname"><span class="pre">plot_Double_fitting_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_poor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_lines" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_lines">
+<span class="sig-name descname"><span class="pre">plot_Double_fitting_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_poor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_lines" title="Link to this definition">¶</a></dt>
 <dd><p>Plots the double fitting lines on the provided axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -393,8 +552,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot_Double_fitting_points">
-<span class="sig-name descname"><span class="pre">plot_Double_fitting_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noisy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_points" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_points">
+<span class="sig-name descname"><span class="pre">plot_Double_fitting_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noisy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_points" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the double fitting points on the provided axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -407,8 +566,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot_sed_patches">
-<span class="sig-name descname"><span class="pre">plot_sed_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ewr_Single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot_sed_patches" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot_sed_patches">
+<span class="sig-name descname"><span class="pre">plot_sed_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ewr_Single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_sed_patches" title="Link to this definition">¶</a></dt>
 <dd><p>Plots the SED patches on the provided axis. The ‘|’ markers are coloured according to <cite>param</cite> variable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -421,26 +580,16 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.plot_skeleton">
-<span class="sig-name descname"><span class="pre">plot_skeleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.plot_skeleton" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Grid.plot_skeleton">
+<span class="sig-name descname"><span class="pre">plot_skeleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hide_legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_skeleton" title="Link to this definition">¶</a></dt>
 <dd><p>Plots the skeleton of the data on the provided axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ax</strong> (<em>plt.Axes</em><em>, </em><em>optional</em>) – The axes to plot on. If None, a new figure and axes are created.</p></li>
 <li><p><strong>zorder</strong> (<em>int</em><em>, </em><em>optional</em>) – The z-order for the scatter plot, by default 0.</p></li>
+<li><p><strong>hide_legend</strong> (<em>Bool</em>) – Whether to show the legend. Defaults to False.</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Grid.process_fit_params">
-<span class="sig-name descname"><span class="pre">process_fit_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_fit_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Grid.process_fit_params" title="Link to this definition">¶</a></dt>
-<dd><p>Helper function that processes the fitting parameters to calculate medians and errors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>df_fit_params</strong> (<em>pd.DataFrame</em>) – DataFrame of fit parameters.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -505,18 +654,31 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.calculate_params"><code class="docutils literal notranslate"><span class="pre">Grid.calculate_params()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.get_AB_fit"><code class="docutils literal notranslate"><span class="pre">Grid.get_AB_fit()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.get_AB_fit_params"><code class="docutils literal notranslate"><span class="pre">Grid.get_AB_fit_params()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.get_sed_params"><code class="docutils literal notranslate"><span class="pre">Grid.get_sed_params()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot"><code class="docutils literal notranslate"><span class="pre">Grid.plot()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_T2err"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_T2err()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_lines"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_lines()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot_Double_fitting_points"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_points()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot_sed_patches"><code class="docutils literal notranslate"><span class="pre">Grid.plot_sed_patches()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.plot_skeleton"><code class="docutils literal notranslate"><span class="pre">Grid.plot_skeleton()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Grid.process_fit_params"><code class="docutils literal notranslate"><span class="pre">Grid.process_fit_params()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.T_A"><code class="docutils literal notranslate"><span class="pre">Grid.T_A</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.L_A"><code class="docutils literal notranslate"><span class="pre">Grid.L_A</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.frac_err"><code class="docutils literal notranslate"><span class="pre">Grid.frac_err</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.D"><code class="docutils literal notranslate"><span class="pre">Grid.D</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.niter"><code class="docutils literal notranslate"><span class="pre">Grid.niter</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_nfilters"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_nfilters</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_ewr"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_ewr</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_primary_match"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_primary_match</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.threshold_convergence_rate"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_convergence_rate</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.filter_set"><code class="docutils literal notranslate"><span class="pre">Grid.filter_set</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.x"><code class="docutils literal notranslate"><span class="pre">Grid.x</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.name"><code class="docutils literal notranslate"><span class="pre">Grid.name</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.logT_A"><code class="docutils literal notranslate"><span class="pre">Grid.logT_A</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.logL_A"><code class="docutils literal notranslate"><span class="pre">Grid.logL_A</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.n_B"><code class="docutils literal notranslate"><span class="pre">Grid.n_B</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.logT_B_list"><code class="docutils literal notranslate"><span class="pre">Grid.logT_B_list</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.logL_B_list"><code class="docutils literal notranslate"><span class="pre">Grid.logL_B_list</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.calculate_params"><code class="docutils literal notranslate"><span class="pre">Grid.calculate_params()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot"><code class="docutils literal notranslate"><span class="pre">Grid.plot()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_T2err"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_T2err()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_lines"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_lines()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_points"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_points()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_sed_patches"><code class="docutils literal notranslate"><span class="pre">Grid.plot_sed_patches()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Grid.plot_skeleton"><code class="docutils literal notranslate"><span class="pre">Grid.plot_skeleton()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -530,7 +692,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

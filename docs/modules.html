@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Spectrum" href="spectrum.html" /><link rel="prev" title="Example analysis of secondary Grid for a given primary" href="example_grid.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Spectrum" href="spectrum.html" /><link rel="prev" title="Guide to estimate SED errors" href="guide_error_estimation.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Code Documentation - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Code Documentation - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -280,79 +283,130 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="spectrum.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.add_noise"><code class="docutils literal notranslate"><span class="pre">Spectrum.add_noise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.error_zero"><code class="docutils literal notranslate"><span class="pre">Spectrum.error_zero</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.flux"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.flux_err"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux_err</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.plot"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.plot_physical"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot_physical()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="spectrum.html#src.sed_analysis_tools.Spectrum.wavelength"><code class="docutils literal notranslate"><span class="pre">Spectrum.wavelength</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.add_noise"><code class="docutils literal notranslate"><span class="pre">Spectrum.add_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.error_zero"><code class="docutils literal notranslate"><span class="pre">Spectrum.error_zero</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.flux"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.flux_err"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux_err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.plot"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.plot_physical"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot_physical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spectrum.html#sed_analysis_tools.sed_analysis_tools.Spectrum.wavelength"><code class="docutils literal notranslate"><span class="pre">Spectrum.wavelength</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fitter.html#src.sed_analysis_tools.Fitter"><code class="docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="fitter.html#src.sed_analysis_tools.Fitter.bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Double()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="fitter.html#src.sed_analysis_tools.Fitter.bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Single()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="fitter.html#src.sed_analysis_tools.Fitter.get_logflux_bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Double()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="fitter.html#src.sed_analysis_tools.Fitter.get_logflux_bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Single()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter"><code class="docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Double()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.bb_Single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Double"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Double()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.get_logflux_bb_Single"><code class="docutils literal notranslate"><span class="pre">Fitter.get_logflux_bb_Single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.synth_phot"><code class="docutils literal notranslate"><span class="pre">Fitter.synth_phot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fitter.html#sed_analysis_tools.sed_analysis_tools.Fitter.x_T_logsf_to_logflux_bb"><code class="docutils literal notranslate"><span class="pre">Fitter.x_T_logsf_to_logflux_bb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet"><code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet.calculate_pivot_wavelength"><code class="docutils literal notranslate"><span class="pre">FilterSet.calculate_pivot_wavelength()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet.plot_all_filters"><code class="docutils literal notranslate"><span class="pre">FilterSet.plot_all_filters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet.plot_filter"><code class="docutils literal notranslate"><span class="pre">FilterSet.plot_filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet.sort_filters"><code class="docutils literal notranslate"><span class="pre">FilterSet.sort_filters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filter_set.html#sed_analysis_tools.sed_analysis_tools.FilterSet.x"><code class="docutils literal notranslate"><span class="pre">FilterSet.x</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star"><code class="docutils literal notranslate"><span class="pre">Star</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Star.estimate_errors()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Star.fit_bb_Double()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Star.fit_bb_Single()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.get_spectrum"><code class="docutils literal notranslate"><span class="pre">Star.get_spectrum()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.plot"><code class="docutils literal notranslate"><span class="pre">Star.plot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Star.plot_estimated_errors()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="star.html#src.sed_analysis_tools.Star.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Star.plot_fitted()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star"><code class="docutils literal notranslate"><span class="pre">Star</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.T"><code class="docutils literal notranslate"><span class="pre">Star.T</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.L"><code class="docutils literal notranslate"><span class="pre">Star.L</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.D"><code class="docutils literal notranslate"><span class="pre">Star.D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.frac_err"><code class="docutils literal notranslate"><span class="pre">Star.frac_err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.seed"><code class="docutils literal notranslate"><span class="pre">Star.seed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.threshold_ewr"><code class="docutils literal notranslate"><span class="pre">Star.threshold_ewr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.x"><code class="docutils literal notranslate"><span class="pre">Star.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.filter_set"><code class="docutils literal notranslate"><span class="pre">Star.filter_set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.name"><code class="docutils literal notranslate"><span class="pre">Star.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.R"><code class="docutils literal notranslate"><span class="pre">Star.R</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.sf"><code class="docutils literal notranslate"><span class="pre">Star.sf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.logT"><code class="docutils literal notranslate"><span class="pre">Star.logT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.logL"><code class="docutils literal notranslate"><span class="pre">Star.logL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.logsf"><code class="docutils literal notranslate"><span class="pre">Star.logsf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Star.estimate_errors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Star.fit_bb_Double()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Star.fit_bb_Single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.get_spectrum"><code class="docutils literal notranslate"><span class="pre">Star.get_spectrum()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.plot"><code class="docutils literal notranslate"><span class="pre">Star.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Star.plot_estimated_errors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="star.html#sed_analysis_tools.sed_analysis_tools.Star.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Star.plot_fitted()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary"><code class="docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Binary.estimate_errors()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.evaluate_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.evaluate_pseudo_secondaries()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Double()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Single()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.plot"><code class="docutils literal notranslate"><span class="pre">Binary.plot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_error_and_pseudo_secondaries()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Binary.plot_estimated_errors()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Binary.plot_fitted()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="binary.html#src.sed_analysis_tools.Binary.plot_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_pseudo_secondaries()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary"><code class="docutils literal notranslate"><span class="pre">Binary</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.A"><code class="docutils literal notranslate"><span class="pre">Binary.A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.B"><code class="docutils literal notranslate"><span class="pre">Binary.B</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.threshold_ewr"><code class="docutils literal notranslate"><span class="pre">Binary.threshold_ewr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.D"><code class="docutils literal notranslate"><span class="pre">Binary.D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.filter_set"><code class="docutils literal notranslate"><span class="pre">Binary.filter_set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.x"><code class="docutils literal notranslate"><span class="pre">Binary.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.frac_err"><code class="docutils literal notranslate"><span class="pre">Binary.frac_err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.seed"><code class="docutils literal notranslate"><span class="pre">Binary.seed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.name"><code class="docutils literal notranslate"><span class="pre">Binary.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.spectrum"><code class="docutils literal notranslate"><span class="pre">Binary.spectrum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.spectrum_ratio"><code class="docutils literal notranslate"><span class="pre">Binary.spectrum_ratio</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.estimate_errors"><code class="docutils literal notranslate"><span class="pre">Binary.estimate_errors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.evaluate_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.evaluate_pseudo_secondaries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Double"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Double()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.fit_bb_Single"><code class="docutils literal notranslate"><span class="pre">Binary.fit_bb_Single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.plot"><code class="docutils literal notranslate"><span class="pre">Binary.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.plot_error_and_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_error_and_pseudo_secondaries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.plot_estimated_errors"><code class="docutils literal notranslate"><span class="pre">Binary.plot_estimated_errors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.plot_fitted"><code class="docutils literal notranslate"><span class="pre">Binary.plot_fitted()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary.html#sed_analysis_tools.sed_analysis_tools.Binary.plot_pseudo_secondaries"><code class="docutils literal notranslate"><span class="pre">Binary.plot_pseudo_secondaries()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.calculate_params"><code class="docutils literal notranslate"><span class="pre">Grid.calculate_params()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.get_AB_fit"><code class="docutils literal notranslate"><span class="pre">Grid.get_AB_fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.get_AB_fit_params"><code class="docutils literal notranslate"><span class="pre">Grid.get_AB_fit_params()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.get_sed_params"><code class="docutils literal notranslate"><span class="pre">Grid.get_sed_params()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot"><code class="docutils literal notranslate"><span class="pre">Grid.plot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot_Double_fitting_T2err"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_T2err()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot_Double_fitting_lines"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_lines()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot_Double_fitting_points"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_points()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot_sed_patches"><code class="docutils literal notranslate"><span class="pre">Grid.plot_sed_patches()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.plot_skeleton"><code class="docutils literal notranslate"><span class="pre">Grid.plot_skeleton()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="grid.html#src.sed_analysis_tools.Grid.process_fit_params"><code class="docutils literal notranslate"><span class="pre">Grid.process_fit_params()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.T_A"><code class="docutils literal notranslate"><span class="pre">Grid.T_A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.L_A"><code class="docutils literal notranslate"><span class="pre">Grid.L_A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.frac_err"><code class="docutils literal notranslate"><span class="pre">Grid.frac_err</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.D"><code class="docutils literal notranslate"><span class="pre">Grid.D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.niter"><code class="docutils literal notranslate"><span class="pre">Grid.niter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.threshold_nfilters"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_nfilters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.threshold_ewr"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_ewr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.threshold_primary_match"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_primary_match</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.threshold_convergence_rate"><code class="docutils literal notranslate"><span class="pre">Grid.threshold_convergence_rate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.filter_set"><code class="docutils literal notranslate"><span class="pre">Grid.filter_set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.x"><code class="docutils literal notranslate"><span class="pre">Grid.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.name"><code class="docutils literal notranslate"><span class="pre">Grid.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.logT_A"><code class="docutils literal notranslate"><span class="pre">Grid.logT_A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.logL_A"><code class="docutils literal notranslate"><span class="pre">Grid.logL_A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.n_B"><code class="docutils literal notranslate"><span class="pre">Grid.n_B</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.logT_B_list"><code class="docutils literal notranslate"><span class="pre">Grid.logT_B_list</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.logL_B_list"><code class="docutils literal notranslate"><span class="pre">Grid.logL_B_list</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.calculate_params"><code class="docutils literal notranslate"><span class="pre">Grid.calculate_params()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot"><code class="docutils literal notranslate"><span class="pre">Grid.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_T2err"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_T2err()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_lines"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot_Double_fitting_points"><code class="docutils literal notranslate"><span class="pre">Grid.plot_Double_fitting_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot_sed_patches"><code class="docutils literal notranslate"><span class="pre">Grid.plot_sed_patches()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="grid.html#sed_analysis_tools.sed_analysis_tools.Grid.plot_skeleton"><code class="docutils literal notranslate"><span class="pre">Grid.plot_skeleton()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="util_functions.html">Utility functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util_functions.html#src.sed_analysis_tools.L_T_to_R"><code class="docutils literal notranslate"><span class="pre">L_T_to_R()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="util_functions.html#src.sed_analysis_tools.R_distance_to_sf"><code class="docutils literal notranslate"><span class="pre">R_distance_to_sf()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="util_functions.html#src.sed_analysis_tools.R_T_to_L"><code class="docutils literal notranslate"><span class="pre">R_T_to_L()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="util_functions.html#src.sed_analysis_tools.sf_distance_to_R"><code class="docutils literal notranslate"><span class="pre">sf_distance_to_R()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="util_functions.html#src.sed_analysis_tools.T_sf_distance_to_L"><code class="docutils literal notranslate"><span class="pre">T_sf_distance_to_L()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html#sed_analysis_tools.sed_analysis_tools.L_T_to_R"><code class="docutils literal notranslate"><span class="pre">L_T_to_R()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html#sed_analysis_tools.sed_analysis_tools.R_distance_to_sf"><code class="docutils literal notranslate"><span class="pre">R_distance_to_sf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html#sed_analysis_tools.sed_analysis_tools.R_T_to_L"><code class="docutils literal notranslate"><span class="pre">R_T_to_L()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html#sed_analysis_tools.sed_analysis_tools.sf_distance_to_R"><code class="docutils literal notranslate"><span class="pre">sf_distance_to_R()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html#sed_analysis_tools.sed_analysis_tools.T_sf_distance_to_L"><code class="docutils literal notranslate"><span class="pre">T_sf_distance_to_L()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -373,14 +427,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="example_grid.html">
+          <a class="prev-page" href="guide_error_estimation.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Example analysis of secondary Grid for a given primary</div>
+                <div class="title">Guide to estimate SED errors</div>
                 
               </div>
             </a>
@@ -408,7 +462,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

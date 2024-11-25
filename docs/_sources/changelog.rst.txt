@@ -1,7 +1,14 @@
-.. currentmodule:: src.sed_analysis_tools
+.. currentmodule:: sed_analysis_tools.sed_analysis_tools
 
 Changelog
 =========
+
+1.2.0
+-----
+
+Added support for using filter profiles while calculating synthetic photometry.
+
+Published module to pip.
 
 1.1.0
 -----

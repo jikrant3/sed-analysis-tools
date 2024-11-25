@@ -6,6 +6,7 @@ Code Documentation
 
    spectrum
    fitter
+   filter_set
    star
    binary
    grid

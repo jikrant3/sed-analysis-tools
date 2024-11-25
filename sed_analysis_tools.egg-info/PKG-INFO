@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: sed_analysis_tools
+Version: 1.2.0
+Summary: Analysing SED fitting of single and binary stars
+Author: Vikrant V. Jadhav
+Author-email: <vjadhav@uni-bonn.de>
+Keywords: python,black body,spectral energy distribution,binary system
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: astropy
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: scipy
+Requires-Dist: tqdm
+
+A package that allows to model stars and binaries as blackbody source, and analyse the recoverability of the stellar parameters for a given filter set and noise characteristics.

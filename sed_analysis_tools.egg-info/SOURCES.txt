@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+sed_analysis_tools/__init__.py
+sed_analysis_tools/sed_analysis_tools.py
+sed_analysis_tools.egg-info/PKG-INFO
+sed_analysis_tools.egg-info/SOURCES.txt
+sed_analysis_tools.egg-info/dependency_links.txt
+sed_analysis_tools.egg-info/requires.txt
+sed_analysis_tools.egg-info/top_level.txt
+tests/test.py

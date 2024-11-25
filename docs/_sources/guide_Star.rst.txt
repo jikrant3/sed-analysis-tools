@@ -1,0 +1,114 @@
+Guide to single ``Star`` systems
+================================
+
+.. code:: ipython3
+
+    from astropy import units as u
+    import numpy as np
+    import sed_analysis_tools as st
+    
+    # Assumed filter system
+    filter_set = st.FilterSet(list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom)
+    print(filter_set.list_pivot_wavelengths)
+
+
+.. parsed-literal::
+
+    [ 1584.89319246  1995.26231497  2511.88643151  3162.27766017
+      3981.07170553  5011.87233627  6309.5734448   7943.28234724
+     10000.         12589.25411794 15848.93192461 19952.62314969
+     25118.8643151  31622.77660168 39810.71705535 50118.72336273] Angstrom
+
+
+Creating Star object
+--------------------
+
+.. code:: ipython3
+
+    starA = st.Star(T=10000*u.K, 
+                    L=1*u.solLum, 
+                    frac_err=0.1,
+                    seed=0,
+                    D=10*u.pc,
+                    threshold_ewr=5.0,
+                    filter_set=filter_set,
+                    name='A')
+    starA.plot()
+
+
+.. image:: guide_Star/output_3_0.png
+
+
+Fitting blackbody model and plotting
+------------------------------------
+
+.. code:: ipython3
+
+    starA.fit_bb_Single()
+    starA.plot_fitted(mode='Single')
+
+
+
+.. image:: guide_Star/output_5_0.png
+
+
+Estimating errors
+-----------------
+
+.. code:: ipython3
+
+    starA.estimate_errors(niter=100,
+                          verbose=True)
+    starA.plot_estimated_errors()
+
+
+.. parsed-literal::
+
+    A
+    -----
+    T_in  = [10000.000000]
+    L_in  = [1.000000]
+    T_fit = [10000.900335 +73.945533-123.948799]
+    L_fit = [0.995295 +0.026868-0.019951]
+    Convergence rate:1.00
+
+
+
+.. image:: guide_Star/output_7_1.png
+
+
+.. code:: ipython3
+
+    starB = st.Star(T=300000*u.K, 
+                    L=1*u.solLum, 
+                    frac_err=0.3,
+                    seed=0,
+                    D=10*u.pc,
+                    threshold_ewr=5.0,
+                    filter_set=filter_set,
+                    name='B')
+    starB.plot()
+    
+    starB.estimate_errors(niter=100,
+                          verbose=True)
+    starB.plot_estimated_errors()
+
+
+.. parsed-literal::
+
+    B
+    -----
+    T_in  = [300000.000000]
+    L_in  = [1.000000]
+    T_fit = [158972.897116 +214488.545372-80722.128686]
+    L_fit = [0.134766 +1.836627-0.114097]
+    Convergence rate:0.69
+
+
+
+.. image:: guide_Star/output_8_3.png
+
+
+
+.. image:: guide_Star/output_8_4.png
+

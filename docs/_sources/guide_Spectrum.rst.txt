@@ -1,0 +1,57 @@
+Guide to use ``Spectrum`` object
+================================
+
+.. code:: ipython3
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import sed_analysis_tools as st
+
+Creating a Spectrum
+-------------------
+
+.. code:: ipython3
+
+    spec = st.Spectrum(x=np.linspace(3.3,4.3,50),               # wavelengths in log(Angstrom)
+                       y=np.random.normal(10,2,50),             # flux in log(erg/s/Angstrom)
+                       frac_err=abs(np.random.normal(0,1,50)),  # Fractional errors
+                       seed=1)
+
+Plotting the Spectrum
+---------------------
+
+.. code:: ipython3
+
+    spec.plot()
+    
+    fig, ax = plt.subplots(figsize=(4,3))
+    spec.plot_physical(ax=ax, c='r', ls=':')
+
+
+
+.. image:: guide_Spectrum/output_5_0.png
+
+
+
+.. image:: guide_Spectrum/output_5_1.png
+
+
+Adding/subtracting/dividing spectra
+-----------------------------------
+
+- Flux is added/subtracted/divided returning new Spectrum object
+
+.. code:: ipython3
+
+    spec1 = st.Spectrum(x=np.linspace(3.3,4.3,50),               # wavelengths in log(Angstrom)
+                       y=np.random.normal(10,0.01,50),             # flux in log(erg/s/Angstrom)
+                       frac_err=abs(np.random.normal(0,0.1,50)),  # Fractional errors
+                       seed=1)
+    
+    spec2 = st.Spectrum(x=np.linspace(3.3,4.3,50),               # wavelengths in log(Angstrom)
+                       y=np.random.normal(9,0.01,50),             # flux in log(erg/s/Angstrom)
+                       frac_err=abs(np.random.normal(0,0.1,50)),  # Fractional errors
+                       seed=2)
+    spec3 = spec1+spec2
+    spec4 = spec1-spec2
+    spec5 = spec1/spec2

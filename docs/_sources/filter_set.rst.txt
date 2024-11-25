@@ -1,0 +1,8 @@
+.. currentmodule:: sed_analysis_tools.sed_analysis_tools
+
+   
+:class:`FilterSet`
+---------------------
+.. autoclass:: FilterSet
+   :members:
+   :inherited-members:

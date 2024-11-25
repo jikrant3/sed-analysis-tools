@@ -1,4 +1,4 @@
-.. currentmodule:: src.sed_analysis_tools
+.. currentmodule:: sed_analysis_tools.sed_analysis_tools
 
    
 :class:`Binary`

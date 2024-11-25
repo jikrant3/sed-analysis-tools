@@ -1,0 +1,136 @@
+Guide to create ``FilterSet``
+=============================
+
+- Can be initialised using 3 approches:
+
+  1. ``list_pivot_wavelengths``: A list of pivot wavelengths with
+     appropriate units
+  2. ``list_filter_names``: A list of standard filter IDs
+  3. ``file_list``: A list of local files to read the filter
+     transmission
+
+.. code:: ipython3
+
+    from astropy import units as u
+    import numpy as np
+    import sed_analysis_tools as st
+
+1. Creating infinitesimally narrow bands - RECOMMENDED
+------------------------------------------------------
+
+- This is 1000 times faster than providing filter transmission cirves,
+  which leads to slower processing due to on-the-fly synthetic
+  photometric calculations
+
+.. code:: ipython3
+
+    filter_set_1 = st.FilterSet(list_pivot_wavelengths=np.linspace(1000, 10000, 10) * u.AA)
+    filter_set_1.plot_all_filters()
+    print(filter_set_1.list_pivot_wavelengths)
+
+
+.. parsed-literal::
+
+    [ 1000.  2000.  3000.  4000.  5000.  6000.  7000.  8000.  9000. 10000.] Angstrom
+
+
+
+.. image:: guide_FilterSet/output_3_1.png
+
+
+.. code:: ipython3
+
+    list_pivot_wavelengths = np.array([1481,1541,1607,2303,4357,5035,5366,
+                                       5822,7619,8101,8578,12350,16620,21589,
+                                       33525,46027,115608])* u.AA
+    filter_set_2 = st.FilterSet(list_pivot_wavelengths=list_pivot_wavelengths)
+    filter_set_2.plot_all_filters()
+    print(filter_set_2.list_pivot_wavelengths)
+
+
+.. parsed-literal::
+
+    [  1481.   1541.   1607.   2303.   4357.   5035.   5366.   5822.   7619.
+       8101.   8578.  12350.  16620.  21589.  33525.  46027. 115608.] Angstrom
+
+
+
+.. image:: guide_FilterSet/output_4_1.png
+
+
+2. Creating ``FilterSet`` based on filter names
+-----------------------------------------------
+
+- Names as given in SVO filter profile survice:
+  http://svo2.cab.inta-csic.es/theory/fps/
+- The required transmission curves will be downloaded automatically
+- If ``dir_filter_transmission`` is provided, it will first look in the
+  folder before downloading files
+
+.. code:: ipython3
+
+    list_filter_names = [
+        "GALEX/GALEX.FUV",
+        "GALEX/GALEX.NUV",
+        "Generic/Bessell.U",
+        "Generic/Bessell.V",
+        "Generic/Bessell.B",
+        "Generic/Bessell.R",
+        "Generic/Bessell.I",
+        "2MASS/2MASS.H",
+        "2MASS/2MASS.J",
+        "2MASS/2MASS.Ks",
+    ]
+    filter_set_3 = st.FilterSet(list_filter_names=list_filter_names)
+    filter_set_3.plot_all_filters()
+    print(filter_set_2.list_pivot_wavelengths)
+
+
+.. parsed-literal::
+
+    [  1481.   1541.   1607.   2303.   4357.   5035.   5366.   5822.   7619.
+       8101.   8578.  12350.  16620.  21589.  33525.  46027. 115608.] Angstrom
+
+
+
+.. image:: guide_FilterSet/output_6_1.png
+
+
+3. Reading transmission curves from ascii files
+-----------------------------------------------
+
+- Provide \`file_list’ with two columns without any header
+- wavelength in Angstrom | Filter transmission (cm2 or normalized
+  response both work)
+
+.. code:: ipython3
+
+    file_list = [
+        "data/filter_transmission/2MASS_2MASS.H.dat",
+        "data/filter_transmission/2MASS_2MASS.J.dat",
+        "data/filter_transmission/2MASS_2MASS.Ks.dat",
+        "data/filter_transmission/GALEX_GALEX.FUV.dat",
+        "data/filter_transmission/GALEX_GALEX.NUV.dat",
+        "data/filter_transmission/Generic_Bessell.B.dat",
+        "data/filter_transmission/Generic_Bessell.I.dat",
+        "data/filter_transmission/Generic_Bessell.R.dat",
+        "data/filter_transmission/Generic_Bessell.U.dat",
+        "data/filter_transmission/Generic_Bessell.V.dat",
+    ]
+    
+    filter_set_4 = st.FilterSet(list_files=file_list)
+    filter_set_4.plot_all_filters()
+    filter_set_4.list_pivot_wavelengths
+
+
+
+
+.. math::
+
+    [1528.081,~2271.0709,~3584.777,~4371.0712,~5477.6973,~6498.0883,~8020.1419,~12358.089,~16457.504,~21603.095] \; \mathrm{\mathring{A}}
+
+
+
+
+.. image:: guide_FilterSet/output_8_1.png
+

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Fitter" href="fitter.html" /><link rel="prev" title="Code Documentation" href="modules.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Spectrum - sed-analysis-tools 1.1.0 documentation</title>
+        <title>Spectrum - sed-analysis-tools 1.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">sed-analysis-tools 1.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">sed-analysis-tools 1.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -218,16 +218,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_spectrum.html">Guide to use Spectrum objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_star.html">Example analysis of single Star systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html">Example analysis of Binary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_grid.html">Example analysis of secondary Grid for a given primary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Spectrum.html">Guide to use <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_FilterSet.html">Guide to create <code class="docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Star.html">Guide to single <code class="docutils literal notranslate"><span class="pre">Star</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html">Guide to <code class="docutils literal notranslate"><span class="pre">Binary</span></code> systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Binary.html#analysis-of-real-binaries">Analysis of real binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_Grid.html">Guide to analyse a <code class="docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide_error_estimation.html">Guide to estimate SED errors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter_set.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterSet</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binary</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grid.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></a></li>
@@ -276,14 +279,14 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="spectrum">
-<h1><a class="reference internal" href="#src.sed_analysis_tools.Spectrum" title="src.sed_analysis_tools.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a><a class="headerlink" href="#spectrum" title="Link to this heading">¶</a></h1>
+<h1><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum" title="sed_analysis_tools.sed_analysis_tools.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a><a class="headerlink" href="#spectrum" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.sed_analysis_tools.Spectrum" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sed_analysis_tools.sed_analysis_tools.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum" title="Link to this definition">¶</a></dt>
 <dd><p>A class to represent a spectrum, including its wavelength, flux, and errors.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.add_noise">
-<span class="sig-name descname"><span class="pre">add_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frac_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.add_noise" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.add_noise">
+<span class="sig-name descname"><span class="pre">add_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frac_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.add_noise" title="Link to this definition">¶</a></dt>
 <dd><p>Add noise to the spectrum based on fractional flux error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -299,8 +302,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.error_zero">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">error_zero</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.error_zero" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.error_zero">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">error_zero</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.error_zero" title="Link to this definition">¶</a></dt>
 <dd><p>Check if the fractional flux error is zero for all values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -313,8 +316,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.flux">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flux</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.flux" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.flux">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flux</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.flux" title="Link to this definition">¶</a></dt>
 <dd><p>Convert logarithmic flux values to linear scale in erg/s/Angstrom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -327,8 +330,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.flux_err">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flux_err</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.flux_err" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.flux_err">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flux_err</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.flux_err" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the flux error based on fractional flux error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -341,8 +344,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.plot" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -355,8 +358,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.plot_physical">
-<span class="sig-name descname"><span class="pre">plot_physical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.plot_physical" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.plot_physical">
+<span class="sig-name descname"><span class="pre">plot_physical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.plot_physical" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the spectrum in physical units.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -369,8 +372,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="src.sed_analysis_tools.Spectrum.wavelength">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#src.sed_analysis_tools.Spectrum.wavelength" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sed_analysis_tools.sed_analysis_tools.Spectrum.wavelength">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Quantity</span></em><a class="headerlink" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.wavelength" title="Link to this definition">¶</a></dt>
 <dd><p>Convert logarithmic wavelength values to linear scale in Angstroms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -442,14 +445,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.add_noise"><code class="docutils literal notranslate"><span class="pre">Spectrum.add_noise()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.error_zero"><code class="docutils literal notranslate"><span class="pre">Spectrum.error_zero</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.flux"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.flux_err"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux_err</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.plot"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.plot_physical"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot_physical()</span></code></a></li>
-<li><a class="reference internal" href="#src.sed_analysis_tools.Spectrum.wavelength"><code class="docutils literal notranslate"><span class="pre">Spectrum.wavelength</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.add_noise"><code class="docutils literal notranslate"><span class="pre">Spectrum.add_noise()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.error_zero"><code class="docutils literal notranslate"><span class="pre">Spectrum.error_zero</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.flux"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.flux_err"><code class="docutils literal notranslate"><span class="pre">Spectrum.flux_err</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.plot"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.plot_physical"><code class="docutils literal notranslate"><span class="pre">Spectrum.plot_physical()</span></code></a></li>
+<li><a class="reference internal" href="#sed_analysis_tools.sed_analysis_tools.Spectrum.wavelength"><code class="docutils literal notranslate"><span class="pre">Spectrum.wavelength</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -463,7 +466,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=2a705162"></script>
+</div><script src="_static/documentation_options.js?v=872021ae"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
