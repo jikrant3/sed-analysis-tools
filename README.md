@@ -29,7 +29,7 @@ If you use this code for your work, kindly include a citation for this code [![D
 Jadhav (2024, in prep) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
 
 ```
-@software{jikrant3_2024_14166044,
+@software{jikrant3_2024_13789847,
 author       = {{Jadhav}, Vikrant V.},
 title        = {jikrant3/sed-analysis-tools},
 month        = Nov,
