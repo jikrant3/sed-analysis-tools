@@ -1,5 +1,5 @@
 # sed_analysis_tools
-A python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2024, in prep).
+A Python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2024, in prep).
 
 ### Documentation at [jikrant3.github.io/sed-analysis-tools](https://jikrant3.github.io/sed-analysis-tools)
 
@@ -24,9 +24,10 @@ Understanding the recoverability of binary system using SED for a given filter s
 Estimating SED fitting errors assuming blackbody approximation. And visualizing the possible degeneracy due to nearby secondaries resulting in similar HRD position.
 ![error_estimation](docs/_images/error_estimation.png)
 ### Citing sed_analysis_tools
-If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/856901189.svg)](https://zenodo.org/doi/10.5281/zenodo.13789847) and accompaning paper.
+If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13789847.svg)](https://doi.org/10.5281/zenodo.13789847)
+ and accompanying paper.
 
-Jadhav (2024, in prep) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
+Jadhav (2025) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
 
 ```
 @software{jikrant3_2024_13789847,
