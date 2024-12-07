@@ -36,8 +36,8 @@ month        = Nov,
 year         = 2024,
 publisher    = {Zenodo},
 version      = {v1.2.0},
-doi          = {10.5281/zenodo.14166044},
-url          = {https://doi.org/10.5281/zenodo.14166044}
+doi          = {10.5281/zenodo.13789847},
+url          = {https://doi.org/10.5281/zenodo.13789847}
 }
 
 ```
