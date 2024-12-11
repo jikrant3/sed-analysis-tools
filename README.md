@@ -27,7 +27,7 @@ Estimating SED fitting errors assuming blackbody approximation. And visualizing 
 If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13789847.svg)](https://doi.org/10.5281/zenodo.13789847)
  and accompanying paper.
 
-Jadhav (2025) _On the detectability and parameterisation of binary stars through spectral energy distributions_.
+Jadhav (2025) _On the detectability and parameterisation of binary stars through spectral energy distributions_, Journal of Astrophysics & Astronomy, in press, [2024arXiv241205606J](https://ui.adsabs.harvard.edu/abs/2024arXiv241205606J/)
 
 ```
 @software{jikrant3_2024_13789847,
@@ -40,5 +40,22 @@ version      = {v1.2.0},
 doi          = {10.5281/zenodo.13789847},
 url          = {https://doi.org/10.5281/zenodo.13789847}
 }
+
+@ARTICLE{2024arXiv241205606J,
+       author = {{Jadhav}, Vikrant V.},
+        title = "{On the detectability and parameterisation of binary stars through spectral energy distributions}",
+      journal = {arXiv e-prints},
+     keywords = {Astrophysics - Solar and Stellar Astrophysics, Astrophysics - Instrumentation and Methods for Astrophysics},
+         year = 2024,
+        month = dec,
+          eid = {arXiv:2412.05606},
+        pages = {arXiv:2412.05606},
+archivePrefix = {arXiv},
+       eprint = {2412.05606},
+ primaryClass = {astro-ph.SR},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv241205606J},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
 
 ```
