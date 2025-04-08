@@ -1,5 +1,5 @@
 # sed_analysis_tools
-A Python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2024, in prep).
+A Python module to model, fit and analyse single and binary spectral energy distributions (SEDs). This theory behind the code, and the method it implements, are described in Jadhav (2025; [2025JApA...46...20J](https://ui.adsabs.harvard.edu/abs/2025JApA...46...20J/abstract)).
 
 ### Documentation at [jikrant3.github.io/sed-analysis-tools](https://jikrant3.github.io/sed-analysis-tools)
 
