@@ -27,7 +27,7 @@ Estimating SED fitting errors assuming blackbody approximation. And visualizing 
 If you use this code for your work, kindly include a citation for this code [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13789847.svg)](https://doi.org/10.5281/zenodo.13789847)
  and accompanying paper.
 
-Jadhav (2025) _On the detectability and parameterisation of binary stars through spectral energy distributions_, Journal of Astrophysics & Astronomy, in press, [2024arXiv241205606J](https://ui.adsabs.harvard.edu/abs/2024arXiv241205606J/)
+Jadhav (2025) _On the detectability and parameterisation of binary stars through spectral energy distributions_, Journal of Astrophysics & Astronomy, 46, 20, [2025JApA...46...20J](https://ui.adsabs.harvard.edu/abs/2025JApA...46...20J/abstract)
 
 ```
 @software{jikrant3_2024_13789847,
@@ -40,22 +40,22 @@ version      = {v1.2.0},
 doi          = {10.5281/zenodo.13789847},
 url          = {https://doi.org/10.5281/zenodo.13789847}
 }
-
-@ARTICLE{2024arXiv241205606J,
+@ARTICLE{2025JApA...46...20J,
        author = {{Jadhav}, Vikrant V.},
-        title = "{On the detectability and parameterisation of binary stars through spectral energy distributions}",
-      journal = {arXiv e-prints},
-     keywords = {Astrophysics - Solar and Stellar Astrophysics, Astrophysics - Instrumentation and Methods for Astrophysics},
-         year = 2024,
-        month = dec,
-          eid = {arXiv:2412.05606},
-        pages = {arXiv:2412.05606},
+        title = "{On the detectability and parameterization of binary stars through spectral energy distributions}",
+      journal = {Journal of Astrophysics and Astronomy},
+     keywords = {Binaries, photometry, spectral energy distribution, Astrophysics - Solar and Stellar Astrophysics, Astrophysics - Instrumentation and Methods for Astrophysics},
+         year = 2025,
+        month = mar,
+       volume = {46},
+       number = {1},
+          eid = {20},
+        pages = {20},
+          doi = {10.1007/s12036-025-10042-2},
 archivePrefix = {arXiv},
        eprint = {2412.05606},
  primaryClass = {astro-ph.SR},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv241205606J},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2025JApA...46...20J},
       adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
-
-
 ```
