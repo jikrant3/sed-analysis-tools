@@ -187,6 +187,42 @@ def L_T_to_R(L: u.solLum, T: u.Kelvin) -> u.Quantity:
     return (R2**0.5).to(u.solRad)
 
 
+@u.quantity_input
+def magnitude_error_to_fractional_error(magnitude_error: u.mag):
+    """
+    Convert a magnitude uncertainty to a fractional flux uncertainty.
+
+    The conversion assumes the standard astronomical magnitude-flux relation:
+
+    .. math::
+
+        m = -2.5 \log_{10}(F) + C
+
+    A symmetric magnitude error is translated into the corresponding asymmetric
+    flux bounds, which are then averaged to estimate a symmetric flux uncertainty.
+    The resulting fractional flux error is clipped to a maximum value of 1.
+
+    Parameters
+    ----------
+    magnitude_error : astropy.units.Quantity
+        Uncertainty in magnitude, expressed in units of ``mag``.
+
+    Returns
+    -------
+    numpy.ndarray
+        Fractional flux uncertainty (dimensionless). Values larger than 1 are
+        clipped to 1.
+    """
+    _magnitude = magnitude_error - magnitude_error
+    flux_lower = 10 ** (magnitude_error.to_value(u.mag) / -2.5) * u.Jy
+    flux = 10 ** (_magnitude.to_value(u.mag) / -2.5) * u.Jy
+    flux_upper = 10 ** (-magnitude_error.to_value(u.mag) / -2.5) * u.Jy
+    flux_error = np.maximum(flux_upper - flux, flux - flux_lower)
+    fractional_error = flux_error / flux
+    fractional_error = np.where(fractional_error > 1, 1, fractional_error)
+    return fractional_error
+
+
 class Spectrum:
     """
     A class to represent a spectrum, including its wavelength, flux, and errors.
@@ -1056,7 +1092,7 @@ class FilterSet:
         if list_pivot_wavelengths is not None:
             self.mode = "no_filters"
             self.len_filters = len(list_pivot_wavelengths)
-            self.list_pivot_wavelengths = list_pivot_wavelengths
+            self.list_pivot_wavelengths = np.sort(list_pivot_wavelengths)
             return
 
         # In case of list_files or list_filter_names modes
@@ -1359,6 +1395,20 @@ class Fitter:
                 source.misfits_ewr_Single = np.sum(
                     np.abs(source.ewr_Single) >= source.threshold_ewr
                 )
+                _dof = len(spec.flux) - 4  # degree of freedom
+                source.chi_Single = (
+                    (np.sum(source.residual_Single**2 / spec.flux_err**2)) ** 0.5
+                ).value
+                source.chi_reduced_Single = source.chi_Single / _dof**0.5
+                # Scaled chi2
+                a_i = np.where(spec.flux_err < spec.flux * 0.02, 0.02 * spec.flux, spec.flux_err)
+                b_i = np.where(spec.flux_err < spec.flux * 0.10, 0.10 * spec.flux, spec.flux_err)
+                source.vgf_Single = (
+                    (np.sum(source.residual_Single**2 / a_i**2)) ** 0.5 / _dof**0.5
+                ).value
+                source.vgfb_Single = (
+                    (np.sum(source.residual_Single**2 / b_i**2)) ** 0.5 / _dof**0.5
+                ).value
             return popt
 
         except RuntimeError:
@@ -1478,6 +1528,24 @@ class Fitter:
                     source.misfits_ewr_Double = np.sum(
                         np.abs(source.ewr_Double) >= source.threshold_ewr
                     )
+                    _dof = len(spec.flux) - 4  # degree of freedom
+                    source.chi_Double = (
+                        (np.sum(source.residual_Double**2 / spec.flux_err**2)) ** 0.5
+                    ).value
+                    source.chi_reduced_Double = source.chi_Double / _dof**0.5
+                    # Scaled chi2
+                    a_i = np.where(
+                        spec.flux_err < spec.flux * 0.02, 0.02 * spec.flux, spec.flux_err
+                    )
+                    b_i = np.where(
+                        spec.flux_err < spec.flux * 0.10, 0.10 * spec.flux, spec.flux_err
+                    )
+                    source.vgf_Double = (
+                        (np.sum(source.residual_Double**2 / a_i**2)) ** 0.5 / _dof**0.5
+                    ).value
+                    source.vgfb_Double = (
+                        (np.sum(source.residual_Double**2 / b_i**2)) ** 0.5 / _dof**0.5
+                    ).value
 
                 y_A = Fitter.get_logflux_bb_Single(
                     T=popt[0], logsf=popt[1], filter_set=source.filter_set
@@ -1548,8 +1616,8 @@ class Fitter:
         astropy.Quantity
             Integrated flux in units of ergs/cm^2/s/Å.
         """
-        Nf = filter_response / np.trapz(filter_response, wavelength)
-        flux = np.trapz(flux * Nf, wavelength)
+        Nf = filter_response / np.trapezoid(filter_response, wavelength)
+        flux = np.trapezoid(flux * Nf, wavelength)
         return flux.to(u.erg / u.s / u.Angstrom)
 
     @staticmethod
@@ -1879,6 +1947,9 @@ class Star:
                     logL=A.logL,
                     logT_Single=A.logT_Single,
                     logL_Single=A.logL_Single,
+                    chi_reduced_Single=A.chi_reduced_Single,
+                    vgf_Single=A.vgf_Single,
+                    vgfb_Single=A.vgfb_Single,
                 )
             else:
                 _fit_params_Single = dict(
@@ -1888,6 +1959,9 @@ class Star:
                     logL=A.logL,
                     logT_Single=np.nan,
                     logL_Single=np.nan,
+                    chi_reduced_Single=np.nan,
+                    vgf_Single=np.nan,
+                    vgfb_Single=np.nan,
                 )
             fit_params.append(_fit_params_Single)
         df_fit_params = pd.DataFrame(fit_params)
@@ -1907,7 +1981,15 @@ class Star:
         ]:
             df_summary[column] = df_fit_params_good.iloc[0][column]
 
-        for column in ["logT_Single", "logL_Single", "T_Single", "L_Single"]:
+        for column in [
+            "logT_Single",
+            "logL_Single",
+            "T_Single",
+            "L_Single",
+            "chi_reduced_Single",
+            "vgf_Single",
+            "vgfb_Single",
+        ]:
             q16, q50, q84 = np.nanquantile(df_fit_params_good[column], [0.16, 0.50, 0.84])
             df_summary[column + "_16"] = q16
             df_summary[column + "_50"] = q50
@@ -1937,7 +2019,10 @@ class Star:
                     df_summary["e_L_Single_lower"],
                 )
             )
-            print("Convergence rate:%.2f" % self.convergence_rate)
+            print(
+                "Convergence rate:%.2f, χ$_r$:%.2f, vgf$_b$:%.2f"
+                % (self.convergence_rate, self.chi_reduced_Single, self.vgfb_Single)
+            )
 
     def plot_estimated_errors(self, ax=None, plot_name: str = None) -> None:
         """
@@ -2180,8 +2265,9 @@ class Binary:
                 filter_set=self.filter_set,
                 name=self.name + "_seed%d" % seed,
             )
+            AB.fit_bb_Single(p0=[AB.A.T.value, AB.A.logsf])
             AB.fit_bb_Double(use_priors=True, threshold_primary_match=threshold_primary_match)
-            fit_params_Single = dict(
+            fit_params_priors = dict(
                 name=AB.name,
                 seed=AB.seed,
                 logT_A=AB.A.logT,
@@ -2189,12 +2275,31 @@ class Binary:
                 logT_B=AB.B.logT,
                 logL_B=AB.B.logL,
             )
+            if hasattr(AB, "logT_Single"):
+                fit_params_Single = dict(
+                    logT_Single=AB.logT_Single,
+                    logL_Single=AB.logL_Single,
+                    chi_reduced_Single=AB.chi_reduced_Single,
+                    vgf_Single=AB.vgf_Single,
+                    vgfb_Single=AB.vgfb_Single,
+                )
+            else:
+                fit_params_Single = dict(
+                    logT_Single=np.nan,
+                    logL_Single=np.nan,
+                    chi_reduced_Single=np.nan,
+                    vgf_Single=np.nan,
+                    vgfb_Single=np.nan,
+                )
             if hasattr(AB, "T_A"):
                 fit_params_Double = dict(
                     logT_A_Double=AB.logT_A,
                     logL_A_Double=AB.logL_A,
                     logT_B_Double=AB.logT_B,
                     logL_B_Double=AB.logL_B,
+                    chi_reduced_Double=AB.chi_reduced_Double,
+                    vgf_Double=AB.vgf_Double,
+                    vgfb_Double=AB.vgfb_Double,
                 )
             else:
                 fit_params_Double = dict(
@@ -2202,9 +2307,14 @@ class Binary:
                     logL_A_Double=np.nan,
                     logT_B_Double=np.nan,
                     logL_B_Double=np.nan,
+                    chi_reduced_Double=np.nan,
+                    vgf_Double=np.nan,
+                    vgfb_Double=np.nan,
                 )
-            _fit_params = fit_params_Single | fit_params_Double
+            _fit_params = fit_params_priors | fit_params_Single
+            _fit_params = _fit_params | fit_params_Double
             fit_params.append(_fit_params)
+
         df_fit_params = pd.DataFrame(fit_params)
         for column in [
             "logT_A",
@@ -2245,6 +2355,9 @@ class Binary:
             "L_A_Double",
             "T_B_Double",
             "L_B_Double",
+            "chi_reduced_Double",
+            "vgf_Double",
+            "vgfb_Double",
         ]:
             q16, q50, q84 = np.nanquantile(df_fit_params_good[column], [0.16, 0.50, 0.84])
             df_summary[column + "_16"] = q16
@@ -2283,7 +2396,10 @@ class Binary:
                     df_summary["e_L_B_Double_lower"],
                 )
             )
-            print("Convergence rate:%.2f" % self.convergence_rate)
+            print(
+                "Convergence rate:%.2f, χ$_r$:%.2f, vgf$_b$:%.2f"
+                % (self.convergence_rate, self.chi_reduced_Double, self.vgfb_Double)
+            )
 
     def plot_estimated_errors(self, ax=None, plot_name: None | str = None) -> None:
         """
@@ -2615,15 +2731,30 @@ class Grid:
             logL_B=AB.B.logL,
         )
         if hasattr(AB, "logT_Single"):
-            fit_params_Single = dict(logT_Single=AB.logT_Single, logL_Single=AB.logL_Single)
+            fit_params_Single = dict(
+                logT_Single=AB.logT_Single,
+                logL_Single=AB.logL_Single,
+                chi_reduced_Single=AB.chi_reduced_Single,
+                vgf_Single=AB.vgf_Single,
+                vgfb_Single=AB.vgfb_Single,
+            )
         else:
-            fit_params_Single = dict(logT_Single=np.nan, logL_Single=np.nan)
+            fit_params_Single = dict(
+                logT_Single=np.nan,
+                logL_Single=np.nan,
+                chi_reduced_Single=np.nan,
+                vgf_Single=np.nan,
+                vgfb_Single=np.nan,
+            )
         if hasattr(AB, "logT_A"):
             fit_params_Double = dict(
                 logT_A_Double=AB.logT_A,
                 logL_A_Double=AB.logL_A,
                 logT_B_Double=AB.logT_B,
                 logL_B_Double=AB.logL_B,
+                chi_reduced_Double=AB.chi_reduced_Double,
+                vgf_Double=AB.vgf_Double,
+                vgfb_Double=AB.vgfb_Double,
             )
         else:
             fit_params_Double = dict(
@@ -2631,6 +2762,9 @@ class Grid:
                 logL_A_Double=np.nan,
                 logT_B_Double=np.nan,
                 logL_B_Double=np.nan,
+                chi_reduced_Double=np.nan,
+                vgf_Double=np.nan,
+                vgfb_Double=np.nan,
             )
         fit_params = fit_params_priors | fit_params_Single
         fit_params = fit_params | fit_params_Double
@@ -2692,6 +2826,12 @@ class Grid:
             "L_A_Double",
             "T_B_Double",
             "L_B_Double",
+            "chi_reduced_Single",
+            "vgf_Single",
+            "vgfb_Single",
+            "chi_reduced_Double",
+            "vgf_Double",
+            "vgfb_Double",
         ]
 
         for column in column_list:
