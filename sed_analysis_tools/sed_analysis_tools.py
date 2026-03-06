@@ -27,7 +27,7 @@ def _rename_attribute(obj, old_name, new_name):
     obj.__dict__[new_name] = obj.__dict__.pop(old_name)
 
 
-def _get_cache_directory(ROOTNAME="sed_analysis_tools"):
+def get_cache_directory(ROOTNAME="sed_analysis_tools"):
     dir_cache = astropyconfig.get_cache_dir(ROOTNAME)
     if not os.path.isdir(dir_cache):
         # if it doesn't exist, make a new cache directory
@@ -307,7 +307,9 @@ class Spectrum:
         """
         flux_new = self.flux - spec2.flux
         if any(flux_new < 0):
-            raise ValueError("Subtraction not allowed because flux sutraction leading to negative flux.")
+            raise ValueError(
+                "Subtraction not allowed because flux sutraction leading to negative flux."
+            )
         flux_err_1 = self.flux_err
         flux_err_2 = spec2.flux_err
         flux_err = np.hypot(flux_err_1, flux_err_2)
@@ -358,7 +360,10 @@ class Spectrum:
         if (isinstance(frac_err, list)) or (isinstance(frac_err, np.ndarray)):
             noise = []
             if len(frac_err) != len(self.y):
-                raise ValueError("frac_err (%s) must be either float. Or a list/np.array with same length as x." % frac_err)
+                raise ValueError(
+                    "frac_err (%s) must be either float. Or a list/np.array with same length as x."
+                    % frac_err
+                )
             for idx, _frac_err in enumerate(frac_err):
                 rng = np.random.default_rng(seed + idx)
                 noise.append(rng.normal(0, _frac_err, 1)[0])
@@ -430,7 +435,7 @@ class Plotter:
         - Bergeron model white dwarf cooling curves are plotted for masses of 0.2, 0.5, and 1.3, with DA spectral type.
         """
         if dir_models is None:
-            dir_models = _get_cache_directory()
+            dir_models = get_cache_directory()
         iso_file_name = dir_models + "/master_isochrone.csv"
         if not os.path.exists(iso_file_name):
             import urllib.request
@@ -498,7 +503,9 @@ class Plotter:
         Plotter.savefig(plot_name)
 
     @staticmethod
-    def plot_spectrum_original_physical(spec: "Spectrum", ax=None, plot_name: str = None, **kwargs) -> None:
+    def plot_spectrum_original_physical(
+        spec: "Spectrum", ax=None, plot_name: str = None, **kwargs
+    ) -> None:
         """
         Plot the spectrum in physical units with a log-log scale.
 
@@ -945,7 +952,9 @@ class Plotter:
         Plotter.savefig(plot_name)
 
     @staticmethod
-    def plot_pseudo_secondaries_Double(source, ax=None, plot_name: str = None, hide_legend=False) -> None:
+    def plot_pseudo_secondaries_Double(
+        source, ax=None, plot_name: str = None, hide_legend=False
+    ) -> None:
         """
         Plot the pseudo-secondaries of the inverse problem for a double blackbody fit.
 
@@ -1006,6 +1015,8 @@ class FilterSet:
     ----------
     list_files : Optional[List[str]], optional
         List of file paths to filter transmission tables, by default None.
+        The file should be a header-less ascii file with 2 columns for
+        wavelength (Å) and transmission.
     list_pivot_wavelengths : Optional[u.Quantity], optional
         List of pivot wavelengths, by default None.
     list_filter_names : Optional[List[str]], optional
@@ -1017,6 +1028,15 @@ class FilterSet:
     ------
     ValueError
         If more than one of `list_files`, `list_pivot_wavelengths`, or `list_filter_names` is provided.
+
+    Note
+    ----
+    `list_filter_names` as given in SVO filter profile survice: http://svo2.cab.inta-csic.es/theory/fps/
+
+    The required transmission curves will be downloaded automatically
+
+    If dir_filter_transmission is provided, it will first look in the folder before
+    downloading files
     """
 
     @u.quantity_input
@@ -1029,7 +1049,9 @@ class FilterSet:
         dir_filter_transmission: Optional[str] = None,
     ):
         if sum(_ is not None for _ in (list_files, list_pivot_wavelengths, list_filter_names)) != 1:
-            raise ValueError("Provide only one of `list_files` or `list_pivot_wavelengths` or `list_filter_names`.")
+            raise ValueError(
+                "Provide only one of `list_files` or `list_pivot_wavelengths` or `list_filter_names`."
+            )
 
         if list_pivot_wavelengths is not None:
             self.mode = "no_filters"
@@ -1046,7 +1068,7 @@ class FilterSet:
         if list_filter_names is not None:
             self.len_filters = len(list_filter_names)
             if dir_filter_transmission is None:
-                dir_filter_transmission = _get_cache_directory()
+                dir_filter_transmission = get_cache_directory()
 
         self.list_pivot_wavelengths = []
         for idx in range(self.len_filters):
@@ -1066,7 +1088,9 @@ class FilterSet:
             else:
                 wavelength_min = min((t["Wavelength"].min()), wavelength_min)
                 wavelength_max = max((t["Wavelength"].max()), wavelength_max)
-        self.list_pivot_wavelengths = [w.to(u.Angstrom).value for w in self.list_pivot_wavelengths] * u.Angstrom
+        self.list_pivot_wavelengths = [
+            w.to(u.Angstrom).value for w in self.list_pivot_wavelengths
+        ] * u.Angstrom
         self.wavelength_min = wavelength_min
         self.wavelength_max = wavelength_max
         self.sort_filters()
@@ -1103,7 +1127,9 @@ class FilterSet:
                 votable = parse(file_name)
                 if votable._infos[0].value != "OK":
                     os.remove(file_name)
-                    raise ValueError("Filter ID (%s) not found in SVO Filter Profile Service." % filter_name)
+                    raise ValueError(
+                        "Filter ID (%s) not found in SVO Filter Profile Service." % filter_name
+                    )
             t = QTable.read(file_name)
 
         t["Transmission"] = t["Transmission"] / t["Transmission"].max()
@@ -1115,6 +1141,8 @@ class FilterSet:
     def calculate_pivot_wavelength(wavelength: u.Quantity, transmission: np.ndarray) -> u.Quantity:
         """
         Calculate the pivot wavelength for a filter.
+
+        - :math:`λ_{pivot} ≡ \\sqrt{\\frac{\\int T(λ) \\, dλ}{\\int T(λ) \\, dλ / λ^2}}`
 
         Parameters
         ----------
@@ -1131,6 +1159,45 @@ class FilterSet:
         num = np.trapezoid(transmission, wavelength)
         den = np.trapezoid(transmission / wavelength**2, wavelength)
         return np.sqrt(num / den)
+
+    def calculate_effective_wavelength(
+        wavelength: u.Quantity, transmission: np.ndarray
+    ) -> u.Quantity:
+        """
+        Calculate the effective wavelength for a filter.
+
+        Parameters
+        ----------
+        wavelength : u.Quantity
+            Wavelengths of the filter.
+        transmission : np.ndarray
+            Transmission values of the filter.
+
+        Returns
+        -------
+        u.Quantity
+            Pivot wavelength.
+        """
+        from specutils import Spectrum1D
+        from specutils.manipulation import FluxConservingResampler
+
+        web_link = "http://svo2.cab.inta-csic.es/theory/fps/morefiles/vega.dat"
+        dir_filter_transmission = get_cache_directory()
+        vega_file_name = dir_filter_transmission + "/vega.dat"
+        if not os.path.isfile(vega_file_name):
+            import urllib.request
+
+            urllib.request.urlretrieve(web_link, vega_file_name)
+        vega = QTable.read(vega_file_name, format="ascii")
+        spec_vega = Spectrum1D(
+            spectral_axis=vega["col1"] * u.Angstrom,
+            flux=vega["col2"] * u.erg / u.cm**2 / u.s / u.Angstrom,
+        )
+        fluxcon = FluxConservingResampler()
+        vega = fluxcon(spec_vega, wavelength)
+        num = np.trapezoid(wavelength * transmission * vega.flux, wavelength)
+        den = np.trapezoid(transmission * vega.flux, wavelength)
+        return num / den
 
     @staticmethod
     def plot_filter(filter_table: QTable, ax: Optional[plt.Axes] = None, **kwargs):
@@ -1193,7 +1260,9 @@ class Fitter:
     def __init__(self):
         pass
 
-    def _get_logflux_bb_Single(self, x: Union[float, np.ndarray], T: float, logsf: float) -> Union[float, np.ndarray]:
+    def _get_logflux_bb_Single(
+        self, x: Union[float, np.ndarray], T: float, logsf: float
+    ) -> Union[float, np.ndarray]:
         return Fitter.get_logflux_bb_Single(T=T, logsf=logsf, filter_set=self.filter_set)
 
     def _get_logflux_bb_Double(
@@ -1213,7 +1282,9 @@ class Fitter:
         )
 
     @staticmethod
-    def bb_Single(source: Union["Star", "Binary"] = None, p0: List[float] = [5000.0, -20]) -> np.ndarray:
+    def bb_Single(
+        source: Union["Star", "Binary"] = None, p0: List[float] = [5000.0, -20]
+    ) -> np.ndarray:
         """
         Fit a single blackbody model to the spectrum.
 
@@ -1248,17 +1319,21 @@ class Fitter:
             check_3 = np.isclose(popt[1], logSFMAX, rtol=0.01)
             if np.sum([check_1, check_0, check_2, check_3]) > 0:
                 warnings.warn(
-                    "%s: Fit rejected due to being close to the parameter (T, logsf) boundary." % source.name,
+                    "%s: Fit rejected due to being close to the parameter (T, logsf) boundary."
+                    % source.name,
                     stacklevel=2,
                 )
                 return np.full(2, np.nan)
 
             # Rejecting unphysical Luminosity
-            _logL = np.log10(T_sf_distance_to_L(T=popt[0] * u.K, sf=10 ** popt[1], distance=source.D).value)
+            _logL = np.log10(
+                T_sf_distance_to_L(T=popt[0] * u.K, sf=10 ** popt[1], distance=source.D).value
+            )
             check_7 = (_logL < logLMIN + 0.01) | (_logL > logLMAX - 0.01)
             if check_7:
                 warnings.warn(
-                    "%s: Fit rejected due to being close to the parameter (L) boundary." % source.name,
+                    "%s: Fit rejected due to being close to the parameter (L) boundary."
+                    % source.name,
                     stacklevel=2,
                 )
                 return np.full(2, np.nan)
@@ -1274,12 +1349,16 @@ class Fitter:
             y_fit = fit_helper._get_logflux_bb_Single(spec.x, popt[0], popt[1])
             source.spectrum_Single = Spectrum(source.spectrum.x, y_fit)
             source.residual_Single = source.spectrum.flux - source.spectrum_Single.flux
-            source.fractional_residual_Single = (source.residual_Single / source.spectrum.flux).value
+            source.fractional_residual_Single = (
+                source.residual_Single / source.spectrum.flux
+            ).value
             source.log_residual_Single = source.spectrum.y - source.spectrum_Single.y
             if not spec.error_zero:
                 source.log_ewr_Single = source.log_residual_Single / spec.y_err
                 source.ewr_Single = (source.residual_Single / spec.flux_err).value
-                source.misfits_ewr_Single = np.sum(np.abs(source.ewr_Single) >= source.threshold_ewr)
+                source.misfits_ewr_Single = np.sum(
+                    np.abs(source.ewr_Single) >= source.threshold_ewr
+                )
             return popt
 
         except RuntimeError:
@@ -1332,20 +1411,26 @@ class Fitter:
             check_3 = np.isclose([popt[1], popt[3]], logSFMAX, rtol=0.01)
             if np.sum([check_1, check_0, check_2, check_3]) > 0:
                 warnings.warn(
-                    "%s: Fit rejected due to being close to the parameter (T, logsf) boundary." % source.name,
+                    "%s: Fit rejected due to being close to the parameter (T, logsf) boundary."
+                    % source.name,
                     stacklevel=2,
                 )
                 return np.full(4, np.nan)
 
             if source is not None:
                 # Rejecting unphysical Luminosity
-                _logL = np.log10(T_sf_distance_to_L(T=popt[0] * u.K, sf=10 ** popt[1], distance=source.D).value)
+                _logL = np.log10(
+                    T_sf_distance_to_L(T=popt[0] * u.K, sf=10 ** popt[1], distance=source.D).value
+                )
                 check_6 = (_logL < logLMIN + 0.01) | (_logL > logLMAX - 0.01)
-                _logL = np.log10(T_sf_distance_to_L(T=popt[2] * u.K, sf=10 ** popt[3], distance=source.D).value)
+                _logL = np.log10(
+                    T_sf_distance_to_L(T=popt[2] * u.K, sf=10 ** popt[3], distance=source.D).value
+                )
                 check_7 = (_logL < logLMIN + 0.01) | (_logL > logLMAX - 0.01)
                 if check_6 | check_7:
                     warnings.warn(
-                        "%s: Fit rejected due to being close to the parameter (L) boundary." % source.name,
+                        "%s: Fit rejected due to being close to the parameter (L) boundary."
+                        % source.name,
                         stacklevel=2,
                     )
                     return np.full(4, np.nan)
@@ -1378,19 +1463,29 @@ class Fitter:
                 source.logL_B = np.log10(source.L_B.value)
                 source.R_B = L_T_to_R(source.L_B, source.T_B)
 
-                y_fit = fit_helper._get_logflux_bb_Double(spec.x, popt[0], popt[1], popt[2], popt[3])
+                y_fit = fit_helper._get_logflux_bb_Double(
+                    spec.x, popt[0], popt[1], popt[2], popt[3]
+                )
                 source.spectrum_Double = Spectrum(source.spectrum.x, y_fit)
                 source.residual_Double = source.spectrum.flux - source.spectrum_Double.flux
-                source.fractional_residual_Double = (source.residual_Double / source.spectrum.flux).value
+                source.fractional_residual_Double = (
+                    source.residual_Double / source.spectrum.flux
+                ).value
                 source.log_residual_Double = source.spectrum.y - source.spectrum_Double.y
                 if not spec.error_zero:
                     source.log_ewr_Double = source.log_residual_Double / spec.y_err
                     source.ewr_Double = (source.residual_Double / spec.flux_err).value
-                    source.misfits_ewr_Double = np.sum(np.abs(source.ewr_Double) >= source.threshold_ewr)
+                    source.misfits_ewr_Double = np.sum(
+                        np.abs(source.ewr_Double) >= source.threshold_ewr
+                    )
 
-                y_A = Fitter.get_logflux_bb_Single(T=popt[0], logsf=popt[1], filter_set=source.filter_set)
+                y_A = Fitter.get_logflux_bb_Single(
+                    T=popt[0], logsf=popt[1], filter_set=source.filter_set
+                )
                 source.spectrum_A = Spectrum(spec.x, y_A)
-                y_B = Fitter.get_logflux_bb_Single(T=popt[2], logsf=popt[3], filter_set=source.filter_set)
+                y_B = Fitter.get_logflux_bb_Single(
+                    T=popt[2], logsf=popt[3], filter_set=source.filter_set
+                )
                 source.spectrum_B = Spectrum(spec.x, y_B)
             return popt
         except RuntimeError:
@@ -1398,7 +1493,9 @@ class Fitter:
             return np.full(4, np.nan)
 
     @staticmethod
-    def x_T_logsf_to_logflux_bb(x: Union[float, List[float], np.ndarray], T: float, logsf: float) -> Union[float, np.ndarray]:
+    def x_T_logsf_to_logflux_bb(
+        x: Union[float, List[float], np.ndarray], T: float, logsf: float
+    ) -> Union[float, np.ndarray]:
         """
         Compute the logarithmic flux for a blackbody given wavelength, temperature, and scaling factor.
 
@@ -1431,7 +1528,7 @@ class Fitter:
     @u.quantity_input
     def synth_phot(
         wavelength: u.m,
-        flux: u.erg / (u.cm**2 * u.s * u.Angstrom),
+        flux: u.erg / (u.cm**2 * u.s * u.Angstrom),  # type: ignore
         filter_response: np.ndarray,
     ) -> u.Quantity:
         """
@@ -1660,7 +1757,9 @@ class Star:
         seed: int = 0,
         D: u.Quantity = 10 * u.pc,
         threshold_ewr: float = 5,
-        filter_set: FilterSet = FilterSet(list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom),
+        filter_set: FilterSet = FilterSet(
+            list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom
+        ),
         name: str = "",
     ) -> None:
         self.T = T.to(u.K)
@@ -1684,7 +1783,9 @@ class Star:
         """
         Generate the spectrum of the star and create a Spectrum object.
         """
-        self.y = Fitter.get_logflux_bb_Single(T=self.T.value, logsf=self.logsf, filter_set=self.filter_set)
+        self.y = Fitter.get_logflux_bb_Single(
+            T=self.T.value, logsf=self.logsf, filter_set=self.filter_set
+        )
         self.spectrum = Spectrum(x=self.x, y=self.y, frac_err=self.frac_err, seed=self.seed)
 
     def fit_bb_Single(self, use_priors: bool = False, **kwargs) -> None:
@@ -1923,7 +2024,9 @@ class Binary:
         seed: int = 0,
         D: u.pc = 10 * u.pc,
         threshold_ewr: float = 5,
-        filter_set: FilterSet = FilterSet(list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom),
+        filter_set: FilterSet = FilterSet(
+            list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom
+        ),
         name: str = "",
     ) -> None:
         self.A = Star(
@@ -1968,11 +2071,17 @@ class Binary:
         """
         if ax is None:
             fig, ax = plt.subplots()
-        Plotter.plot_spectrum_original(self.spectrum, c="0", label="Original", ax=ax, ls="", marker=".")
+        Plotter.plot_spectrum_original(
+            self.spectrum, c="0", label="Original", ax=ax, ls="", marker="."
+        )
         label = "A %d K, %.4f L$_⊙$" % (self.A.T.value, self.A.L.value)
-        Plotter.plot_spectrum_original(self.A.spectrum, c="C0", alpha=0.5, label=label, ax=ax, ls="", marker=".")
+        Plotter.plot_spectrum_original(
+            self.A.spectrum, c="C0", alpha=0.5, label=label, ax=ax, ls="", marker="."
+        )
         label = "B %d K, %.4f L$_⊙$" % (self.B.T.value, self.B.L.value)
-        Plotter.plot_spectrum_original(self.B.spectrum, c="C1", alpha=0.5, label=label, ax=ax, ls="", marker=".")
+        Plotter.plot_spectrum_original(
+            self.B.spectrum, c="C1", alpha=0.5, label=label, ax=ax, ls="", marker="."
+        )
         ax.legend()
 
     def fit_bb_Single(self, **kwargs) -> None:
@@ -2148,7 +2257,10 @@ class Binary:
         self.df_error_summary = df_summary
         if verbose:
             print("%s\n%s" % (self.name, "-" * max(5, len(self.name))))
-            print("T_in  = [%f]\t [%f]\nL_in  = [%f]\t [%f]" % (self.A.T.value, self.B.T.value, self.A.L.value, self.B.L.value))
+            print(
+                "T_in  = [%f]\t [%f]\nL_in  = [%f]\t [%f]"
+                % (self.A.T.value, self.B.T.value, self.A.L.value, self.B.L.value)
+            )
             print(
                 "T_fit = [%f +%f-%f]\t[%f +%f-%f]"
                 % (
@@ -2189,7 +2301,9 @@ class Binary:
         Plotter.plot_error_estimate_Double(self, ax=ax, plot_name=plot_name)
         Plotter.plot_isochrone_and_wd(ax=ax)
 
-    def evaluate_pseudo_secondaries(self, grid_size: int = 5, niter: int = 100, refit: bool = False) -> None:
+    def evaluate_pseudo_secondaries(
+        self, grid_size: int = 5, niter: int = 100, refit: bool = False
+    ) -> None:
         """
         Evaluate a grid of pseudo-secondaries near the HRD position of B component.
 
@@ -2349,13 +2463,17 @@ class Grid:
         threshold_ewr: float = 5,
         threshold_primary_match: float = 0.1,
         threshold_convergence_rate: float = 0.5,
-        filter_set: FilterSet = FilterSet(list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom),
+        filter_set: FilterSet = FilterSet(
+            list_pivot_wavelengths=np.logspace(3.2, 4.7, 16) * u.Angstrom
+        ),
         name: str = "",
         logT_B_list: list[float] = None,
         logL_B_list: list[float] = None,
     ) -> None:
         if np.sum(np.abs(frac_err)) == 0:
-            raise NotImplemented("frac_err=0 is trivial and not implemented. Provide frac_err>0.")
+            raise NotImplementedError(
+                "frac_err=0 is trivial and not implemented. Provide frac_err>0."
+            )
 
         self.T_A = T_A
         self.L_A = L_A
@@ -2583,12 +2701,21 @@ class Grid:
         df_fit_params_summary = pd.concat([q50, q16, q84], axis=1)
 
         for column in column_list:
-            df_fit_params_summary["e_" + column + "_upper"] = df_fit_params_summary[column + "_84"] - df_fit_params_summary[column + "_50"]
-            df_fit_params_summary["e_" + column + "_lower"] = df_fit_params_summary[column + "_50"] - df_fit_params_summary[column + "_16"]
+            df_fit_params_summary["e_" + column + "_upper"] = (
+                df_fit_params_summary[column + "_84"] - df_fit_params_summary[column + "_50"]
+            )
+            df_fit_params_summary["e_" + column + "_lower"] = (
+                df_fit_params_summary[column + "_50"] - df_fit_params_summary[column + "_16"]
+            )
 
         df_fit_params_summary["convergence_rate"] = _group.count()["logT_A_Double"] / self.niter
         df_fit_params_summary["frac_e_T_A"] = (
-            (df_fit_params_summary["e_T_A_Double_lower"] + df_fit_params_summary["e_T_A_Double_upper"]) / 2 / df_fit_params_summary["T_A_Double_50"]
+            (
+                df_fit_params_summary["e_T_A_Double_lower"]
+                + df_fit_params_summary["e_T_A_Double_upper"]
+            )
+            / 2
+            / df_fit_params_summary["T_A_Double_50"]
         )
         self.df_fit_params = df_fit_params
         self.df_fit_params_summary = df_fit_params_summary.reset_index()
@@ -2825,7 +2952,9 @@ class Grid:
 
         logT_B_list = df.logT_B.unique()
         logL_B_list = df.logL_B.unique()
-        color_list = plt.cm.twilight_r(np.linspace(0, 1, len(logT_B_list) + 4))[2:-2]  # creates array of N colors
+        color_list = plt.cm.twilight_r(np.linspace(0, 1, len(logT_B_list) + 4))[
+            2:-2
+        ]  # creates array of N colors
 
         check_1 = self.df_fit_params_summary.convergence_rate >= self.threshold_convergence_rate
         check_2 = self.df_fit_params_summary.frac_e_T_A < self.threshold_primary_match
@@ -2884,7 +3013,9 @@ class Grid:
         check_3 = np.isfinite(df.logT_A_Double_50)
         _filter = check_1 & check_2 & check_3
         df = df[_filter].reset_index()
-        color_list = plt.cm.twilight_r(np.linspace(0, 1, len(logT_B_list) + 4))[2:-2]  # creates array of N colors
+        color_list = plt.cm.twilight_r(np.linspace(0, 1, len(logT_B_list) + 4))[
+            2:-2
+        ]  # creates array of N colors
 
         if noisy:
             from matplotlib.colors import LinearSegmentedColormap
@@ -3008,10 +3139,16 @@ class Grid:
         self.plot_Double_fitting_points(ax=ax[1, 1], noisy=False)
         self.plot_Double_fitting_T2err(ax=ax[1, 2])
         ax[0, 1].set_title("SEDs of secondaries coloured with EWR\nOnly 1st random realisation")
-        ax[0, 0].set_title("Input and recovered positions connected by lines\nOnly 1st random realisation")
-        ax[1, 0].set_title("Input and recovered positions connected by lines\nAverage of all random realisation")
+        ax[0, 0].set_title(
+            "Input and recovered positions connected by lines\nOnly 1st random realisation"
+        )
+        ax[1, 0].set_title(
+            "Input and recovered positions connected by lines\nAverage of all random realisation"
+        )
         ax[1, 1].set_title(
             "Input and recovered positions connected by lines\nDiamond markers show Monte-Carlo errors\nAverage of all random realisation"
         )
-        ax[1, 2].set_title("Percentage error in T2 for each secondary\nAverage of all random realisation")
+        ax[1, 2].set_title(
+            "Percentage error in T2 for each secondary\nAverage of all random realisation"
+        )
         Plotter.savefig(plot_name)
